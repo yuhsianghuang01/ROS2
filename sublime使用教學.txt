@@ -1,0 +1,401 @@
+# Sublime Text 編輯器使用教學
+
+## 目錄
+1. [安裝 Sublime Text](#安裝-sublime-text)
+2. [基本操作](#基本操作)
+3. [文件管理](#文件管理)
+4. [編輯功能](#編輯功能)
+5. [搜尋與替換](#搜尋與替換)
+6. [多重選擇](#多重選擇)
+7. [程式碼導航](#程式碼導航)
+8. [套件管理](#套件管理)
+9. [主題與配色](#主題與配色)
+10. [快捷鍵大全](#快捷鍵大全)
+11. [實用技巧](#實用技巧)
+
+---
+
+## 安裝 Sublime Text
+
+### 方法1：使用官方APT源（推薦）
+```bash
+# 安裝GPG密鑰
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+
+# 確保apt可以使用HTTPS源
+sudo apt-get install apt-transport-https
+
+# 添加穩定版本的源
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+# 更新套件列表並安裝
+sudo apt-get update
+sudo apt-get install sublime-text
+```
+
+### 方法2：使用Snap
+```bash
+sudo snap install sublime-text --classic
+```
+
+### 方法3：下載deb套件
+```bash
+# 下載最新版本
+wget https://download.sublimetext.com/sublime-text_build-4143_amd64.deb
+
+# 安裝
+sudo dpkg -i sublime-text_build-4143_amd64.deb
+
+# 修復依賴關係（如果有錯誤）
+sudo apt-get install -f
+```
+
+---
+
+## 基本操作
+
+### 啟動Sublime Text
+```bash
+# 從終端啟動
+subl
+
+# 開啟特定檔案
+subl filename.txt
+
+# 開啟資料夾
+subl /path/to/folder
+
+# 開啟目前目錄
+subl .
+```
+
+### 基本界面介紹
+- **編輯區域**：主要的程式碼編輯區
+- **側邊欄**：顯示檔案和資料夾結構
+- **狀態列**：顯示檔案資訊、游標位置等
+- **標籤列**：顯示開啟的檔案標籤
+
+---
+
+## 文件管理
+
+### 新建檔案
+- **快捷鍵**：`Ctrl + N`
+- **選單**：File > New File
+
+### 開啟檔案
+- **快捷鍵**：`Ctrl + O`
+- **選單**：File > Open File
+- **快速開啟**：`Ctrl + P`（模糊搜尋檔案名）
+
+### 儲存檔案
+- **儲存**：`Ctrl + S`
+- **另存為**：`Ctrl + Shift + S`
+- **儲存所有**：`Ctrl + Alt + S`
+
+### 關閉檔案
+- **關閉目前檔案**：`Ctrl + W`
+- **關閉所有檔案**：`Ctrl + Shift + W`
+
+### 檔案切換
+- **下一個標籤**：`Ctrl + Tab`
+- **上一個標籤**：`Ctrl + Shift + Tab`
+- **跳到特定標籤**：`Alt + [數字]`
+
+---
+
+## 編輯功能
+
+### 基本編輯
+- **複製**：`Ctrl + C`
+- **剪下**：`Ctrl + X`
+- **貼上**：`Ctrl + V`
+- **復原**：`Ctrl + Z`
+- **重做**：`Ctrl + Y` 或 `Ctrl + Shift + Z`
+
+### 行操作
+- **複製整行**：`Ctrl + Shift + D`
+- **刪除整行**：`Ctrl + Shift + K`
+- **向上移動行**：`Ctrl + Shift + ↑`
+- **向下移動行**：`Ctrl + Shift + ↓`
+- **在上方插入新行**：`Ctrl + Shift + Enter`
+- **在下方插入新行**：`Ctrl + Enter`
+
+### 選擇操作
+- **選擇整行**：`Ctrl + L`
+- **選擇字詞**：`Ctrl + D`
+- **選擇所有相同字詞**：`Alt + F3`
+- **選擇到行首**：`Shift + Home`
+- **選擇到行尾**：`Shift + End`
+- **選擇到文件開頭**：`Ctrl + Shift + Home`
+- **選擇到文件結尾**：`Ctrl + Shift + End`
+
+### 縮排與對齊
+- **增加縮排**：`Tab` 或 `Ctrl + ]`
+- **減少縮排**：`Shift + Tab` 或 `Ctrl + [`
+- **自動縮排**：`Ctrl + Shift + P` > "Reindent Lines"
+
+---
+
+## 搜尋與替換
+
+### 基本搜尋
+- **開啟搜尋**：`Ctrl + F`
+- **下一個結果**：`F3` 或 `Enter`
+- **上一個結果**：`Shift + F3`
+- **搜尋選取的文字**：`Ctrl + F3`
+
+### 替換
+- **開啟替換**：`Ctrl + H`
+- **替換**：`Ctrl + Shift + H`
+- **全部替換**：`Ctrl + Alt + Enter`
+
+### 進階搜尋
+- **在檔案中搜尋**：`Ctrl + Shift + F`
+- **正規表示式搜尋**：在搜尋框中點擊 `.*` 按鈕
+- **區分大小寫**：點擊 `Aa` 按鈕
+- **整字搜尋**：點擊 `ab` 按鈕
+
+### 跳轉
+- **跳到行號**：`Ctrl + G`
+- **跳到符號**：`Ctrl + R`
+- **跳到定義**：`F12`
+- **返回**：`Alt + -`
+
+---
+
+## 多重選擇
+
+### 多重游標
+- **添加游標**：`Ctrl + 點擊`
+- **選擇下一個相同字詞**：`Ctrl + D`
+- **跳過下一個相同字詞**：`Ctrl + K, Ctrl + D`
+- **選擇所有相同字詞**：`Alt + F3`
+- **分割選擇成行**：`Ctrl + Shift + L`
+
+### 列選擇
+- **列選擇模式**：`Shift + 右鍵拖曳`
+- **添加上方行**：`Ctrl + Alt + ↑`
+- **添加下方行**：`Ctrl + Alt + ↓`
+
+---
+
+## 程式碼導航
+
+### 摺疊程式碼
+- **摺疊選擇**：`Ctrl + Shift + [`
+- **展開選擇**：`Ctrl + Shift + ]`
+- **摺疊所有**：`Ctrl + K, Ctrl + 1`
+- **展開所有**：`Ctrl + K, Ctrl + J`
+
+### 語法高亮
+- **設定語法**：`Ctrl + Shift + P` > "Set Syntax"
+- **自動偵測語法**：通常根據副檔名自動設定
+
+### 程式碼補全
+- **觸發自動補全**：`Ctrl + Space`
+- **接受建議**：`Tab` 或 `Enter`
+
+---
+
+## 套件管理
+
+### 安裝Package Control
+1. 按 `Ctrl + Shift + P` 開啟命令面板
+2. 輸入 "Install Package Control"
+3. 按 Enter 安裝
+
+### 安裝套件
+1. 按 `Ctrl + Shift + P`
+2. 輸入 "Package Control: Install Package"
+3. 搜尋並選擇要安裝的套件
+
+### 推薦套件
+- **Emmet**：HTML/CSS快速編寫
+- **SublimeLinter**：程式碼檢查
+- **GitGutter**：Git差異顯示
+- **BracketHighlighter**：括號配對高亮
+- **AutoFileName**：檔案路徑自動補全
+- **ColorPicker**：顏色選擇器
+- **SideBarEnhancements**：側邊欄增強
+- **Terminus**：內建終端
+
+### 套件管理
+- **列出已安裝套件**：Package Control: List Packages
+- **移除套件**：Package Control: Remove Package
+- **停用套件**：Package Control: Disable Package
+
+---
+
+## 主題與配色
+
+### 更改主題
+1. 開啟 Preferences > Theme
+2. 選擇喜歡的主題
+
+### 更改配色方案
+1. 開啟 Preferences > Color Scheme
+2. 選擇配色方案
+
+### 自訂設定
+- **開啟使用者設定**：Preferences > Settings
+- **開啟按鍵綁定**：Preferences > Key Bindings
+
+### 常用設定範例
+```json
+{
+    "font_size": 12,
+    "theme": "Adaptive.sublime-theme",
+    "color_scheme": "Monokai.sublime-color-scheme",
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
+    "word_wrap": true,
+    "show_line_numbers": true,
+    "highlight_line": true,
+    "auto_save": true
+}
+```
+
+---
+
+## 快捷鍵大全
+
+### 檔案操作
+- `Ctrl + N`：新建檔案
+- `Ctrl + O`：開啟檔案
+- `Ctrl + S`：儲存
+- `Ctrl + Shift + S`：另存為
+- `Ctrl + W`：關閉檔案
+- `Ctrl + Shift + T`：重新開啟關閉的檔案
+
+### 編輯操作
+- `Ctrl + Z`：復原
+- `Ctrl + Y`：重做
+- `Ctrl + C`：複製
+- `Ctrl + X`：剪下
+- `Ctrl + V`：貼上
+- `Ctrl + A`：全選
+
+### 搜尋操作
+- `Ctrl + F`：搜尋
+- `Ctrl + H`：替換
+- `Ctrl + Shift + F`：在檔案中搜尋
+- `Ctrl + G`：跳到行號
+- `Ctrl + P`：快速開啟檔案
+
+### 選擇操作
+- `Ctrl + L`：選擇整行
+- `Ctrl + D`：選擇字詞
+- `Alt + F3`：選擇所有相同字詞
+- `Ctrl + Shift + L`：分割選擇成行
+
+### 導航操作
+- `Ctrl + R`：跳到符號
+- `F12`：跳到定義
+- `Ctrl + -`：返回
+- `Ctrl + Shift + P`：命令面板
+
+### 視窗操作
+- `F11`：全螢幕模式
+- `Shift + F11`：無干擾模式
+- `Alt + Shift + 2`：分割成兩欄
+- `Alt + Shift + 1`：單欄檢視
+
+---
+
+## 實用技巧
+
+### 1. 專案管理
+- 使用 `Project > Save Project As` 儲存專案
+- 使用 `Project > Switch Project` 切換專案
+- 側邊欄可以管理整個資料夾結構
+
+### 2. 代碼片段 (Snippets)
+- 建立常用程式碼片段
+- 使用 Tools > Developer > New Snippet
+- 輸入觸發詞後按 Tab 展開
+
+### 3. 建置系統
+- Tools > Build System 設定編譯環境
+- `Ctrl + B` 執行建置
+- 支援多種程式語言的建置配置
+
+### 4. 正規表示式技巧
+- 在搜尋中使用正規表示式
+- 常用表達式：
+  - `\d+`：數字
+  - `\w+`：字母數字
+  - `.*`：任意字符
+  - `^`：行首
+  - `$`：行尾
+
+### 5. 外掛開發
+- 使用 Python 開發自訂外掛
+- 檔案位置：`~/.config/sublime-text-3/Packages/User/`
+- 使用 Sublime Text API 文件
+
+### 6. 效能優化
+- 關閉不需要的外掛
+- 調整檔案索引設定
+- 使用 `hot_exit` 設定快速啟動
+
+### 7. 協作技巧
+- 使用 Git 整合功能
+- 設定程式碼格式化規則
+- 共享設定檔和快捷鍵配置
+
+---
+
+## 故障排除
+
+### 常見問題
+
+**Q: Sublime Text 啟動很慢**
+A: 檢查已安裝的套件，停用不必要的套件
+
+**Q: 中文顯示亂碼**
+A: 安裝 ConvertToUTF8 套件，或在設定中指定編碼
+
+**Q: 無法自動補全**
+A: 檢查語法設定是否正確，確保相關套件已安裝
+
+**Q: 快捷鍵不起作用**
+A: 檢查按鍵綁定設定，可能與其他軟體衝突
+
+### 重置設定
+如果遇到問題，可以重置設定：
+```bash
+# 備份設定
+cp -r ~/.config/sublime-text-3 ~/.config/sublime-text-3.backup
+
+# 刪除設定目錄（重新啟動會重建）
+rm -rf ~/.config/sublime-text-3
+```
+
+---
+
+## 進階功能
+
+### 巨集錄製
+1. Tools > Record Macro 開始錄製
+2. 執行要重複的操作
+3. Tools > Stop Recording Macro 停止錄製
+4. Tools > Save Macro 儲存巨集
+5. 設定快捷鍵執行巨集
+
+### 指令行整合
+```bash
+# 建立符號連結（如果不存在）
+sudo ln -sf /opt/sublime_text/sublime_text /usr/local/bin/subl
+
+# 設定環境變數
+echo 'export EDITOR="subl -w"' >> ~/.bashrc
+```
+
+### 遠端編輯
+- 使用 rsub 套件進行遠端編輯
+- 配合 SSH 隧道編輯遠端檔案
+
+---
+
+這份教學涵蓋了 Sublime Text 的所有基本和進階功能。建議先熟悉基本操作，再逐步學習進階功能。記住，熟練使用快捷鍵是提高效率的關鍵！
