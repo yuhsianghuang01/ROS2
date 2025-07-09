@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nano 文字編輯器使用教學</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-left: 5px solid #3498db;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+
+        .quick-start {
+            background-color: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .detailed-content {
+            background-color: #f8f9fa;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .command-box {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .shortcut-table th,
+        .shortcut-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .shortcut-table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .shortcut-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .tip-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .info-box {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .toc {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📝 nano 文字編輯器使用教學</h1>
+
+        <div class="toc">
+            <h3>📋 目錄</h3>
+            <ul>
+                <li><a href="#part1">第一部分：快速上手指南</a>
+                    <ul>
+                        <li><a href="#what-is-nano">什麼是 nano？</a></li>
+                        <li><a href="#installation">安裝 nano</a></li>
+                        <li><a href="#basic-usage">基本使用方法</a></li>
+                        <li><a href="#essential-shortcuts">必學快捷鍵</a></li>
+                        <li><a href="#first-example">第一個編輯範例</a></li>
+                    </ul>
+                </li>
+                <li><a href="#part2">第二部分：詳細概念與操作技巧</a>
+                    <ul>
+                        <li><a href="#advanced-features">進階功能</a></li>
+                        <li><a href="#configuration">設定與自訂</a></li>
+                        <li><a href="#practical-tips">實用技巧</a></li>
+                        <li><a href="#troubleshooting">故障排除</a></li>
+                        <li><a href="#comparison">與其他編輯器比較</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 第一部分：快速上手 -->
+        <div class="quick-start">
+            <h2 id="part1">🚀 第一部分：快速上手指南</h2>
+
+            <h3 id="what-is-nano">💡 什麼是 nano？</h3>
+            <p><strong>nano</strong> 是一個簡單易用的終端文字編輯器，特別適合 Linux 初學者使用。它的設計理念是「簡單直觀」，所有常用功能的快捷鍵都會顯示在螢幕底部。</p>
+
+            <div class="info-box">
+                <strong>🎯 nano 的優點：</strong>
+                <ul>
+                    <li>學習曲線平緩，容易上手</li>
+                    <li>快捷鍵顯示在畫面底部，不用背誦</li>
+                    <li>輕量級，啟動快速</li>
+                    <li>大部分 Linux 發行版預設安裝</li>
+                    <li>支援語法高亮和基本編輯功能</li>
+                </ul>
+            </div>
+
+            <h3 id="installation">📦 安裝 nano</h3>
+            <p>大部分 Linux 發行版都預設安裝了 nano，如果沒有，可以使用以下命令安裝：</p>
+
+            <div class="command-box">
+                # Ubuntu/Debian<br>
+                sudo apt install nano<br><br>
+
+                # CentOS/RHEL/Fedora<br>
+                sudo yum install nano<br>
+                # 或<br>
+                sudo dnf install nano<br><br>
+
+                # Arch Linux<br>
+                sudo pacman -S nano
+            </div>
+
+            <p>檢查是否已安裝：</p>
+            <div class="command-box">nano --version</div>
+
+            <h3 id="basic-usage">🔧 基本使用方法</h3>
+
+            <h4>啟動 nano</h4>
+            <div class="command-box">
+                # 建立新檔案<br>
+                nano<br><br>
+
+                # 開啟現有檔案<br>
+                nano filename.txt<br><br>
+
+                # 以唯讀模式開啟<br>
+                nano -v filename.txt<br><br>
+
+                # 顯示行號<br>
+                nano -l filename.txt<br><br>
+
+                # 開啟檔案並跳到第10行<br>
+                nano +10 filename.txt
+            </div>
+
+            <h4>nano 介面說明</h4>
+            <ul>
+                <li><strong>頂部</strong>：顯示 nano 版本和檔案名稱</li>
+                <li><strong>中間區域</strong>：文字編輯區</li>
+                <li><strong>底部兩行</strong>：顯示常用快捷鍵
+                    <ul>
+                        <li><code>^</code> 代表 Ctrl 鍵</li>
+                        <li><code>M-</code> 代表 Alt 鍵（在某些鍵盤配置中可能是 Meta 鍵，例如 macOS 或特定的 Linux 系統）。Alt 鍵常用於執行進階功能，例如在 nano
+                            中使用 <code>Alt + W</code> 繼續搜尋或 <code>Alt + R</code> 啟用正規表示式模式。</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="essential-shortcuts">⌨️ 必學快捷鍵</h3>
+
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>快捷鍵</th>
+                        <th>功能</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + O</code></td>
+                        <td>儲存檔案</td>
+                        <td>Write Out，會提示輸入檔案名稱</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + X</code></td>
+                        <td>退出 nano</td>
+                        <td>如有未儲存變更會提示儲存</td>
+                    </tr>
+                    <tr style="background-color: cornflowerblue;">
+                        <td><code>Ctrl + W</code></td>
+                        <td>搜尋文字</td>
+                        <td>Where Is，輸入要搜尋的文字</td>
+                    </tr>
+                    <tr style="background-color: cornflowerblue">
+                        <td><code>Alt + R</code></td>
+                        <td>啟用正規表示式</td>
+                        <td>在搜尋模式下啟用 regex 語法（注意：GNU nano 的正規表示式支援有限，<code>\d</code> 可能無法匹配數字，請使用 <code>[0-9]</code> 替代）
+                        </td>
+                    </tr>
+                    <tr style="background-color: cornflowerblue">
+                        <td><code>Alt + R</code></td>
+                        <td>查找 "\w"</td>
+                        <td>啟用正規表示式後，輸入 <code>[a-z]</code> 查找匹配的單字字符，例如字母、數字或底線</td>
+                    </tr>
+                    <tr>
+                        <td><code>\d</code></td>
+                        <td>數字</td>
+                        <td>匹配任意一個數字（0-9）</td>
+                    </tr>
+                    <tr>
+                        <td><code>\w</code></td>
+                        <td>單字字符</td>
+                        <td>匹配任意一個字母、數字或底線</td>
+                    </tr>
+                    <tr>
+                        <td><code>\s</code></td>
+                        <td>空白字符</td>
+                        <td>匹配空格、Tab 或其他空白字符</td>
+                    </tr>
+                    <tr>
+                        <td><code>.</code></td>
+                        <td>任意字符</td>
+                        <td>匹配除換行符以外的任意單個字符</td>
+                    </tr>
+                    <tr>
+                        <td><code>^</code></td>
+                        <td>行首匹配</td>
+                        <td>匹配行的開頭</td>
+                    </tr>
+                    <tr>
+                        <td><code>$</code></td>
+                        <td>行尾匹配</td>
+                        <td>匹配行的結尾</td>
+                    </tr>
+                    <tr>
+                        <td><code>[abc]</code></td>
+                        <td>字符集</td>
+                        <td>匹配 a、b 或 c 中的任意一個字符</td>
+                    </tr>
+                    <tr>
+                        <td><code>[a-z]</code></td>
+                        <td>字符範圍</td>
+                        <td>匹配小寫字母 a 到 z 中的任意一個字符</td>
+                    </tr>
+                    <tr>
+                        <td><code>(...)</code></td>
+                        <td>分組</td>
+                        <td>將匹配的內容分組，便於後續引用</td>
+                    </tr>
+                    <tr>
+                        <td><code>\b</code></td>
+                        <td>單詞邊界</td>
+                        <td>匹配單詞的開頭或結尾</td>
+                    </tr>
+                    <tr>
+                        <td><code>\*</code></td>
+                        <td>零次或多次</td>
+                        <td>匹配前一個字符零次或多次</td>
+                    </tr>
+                    <tr>
+                        <td><code>\+</code></td>
+                        <td>一次或多次</td>
+                        <td>匹配前一個字符一次或多次</td>
+                    </tr>
+                    <tr>
+                        <td><code>\?</code></td>
+                        <td>零次或一次</td>
+                        <td>匹配前一個字符零次或一次</td>
+                    </tr>
+                    <tr>
+                        <td><code>\|</code></td>
+                        <td>或</td>
+                        <td>匹配左邊或右邊的表達式</td>
+                    </tr>
+                    <tr style="background-color: cornflowerblue">
+                        <td><code>Alt + R</code></td>
+                        <td>查找 "\d2"</td>
+                        <td>啟用正規表示式後，輸入 <code>\d2</code> 查找匹配的數字後接 2 的內容，例如 "123asdf45624" 中的 "24"</td>
+                    </tr>
+                    <tr style="background-color: lightgreen;">
+                        <td>步驟</td>
+                        <td>使用鍵盤操作查找 regex</td>
+                        <td>
+                            <ol>
+                                <li>按 <code>Ctrl + W</code> 開啟搜尋模式。</li>
+                                <li>按 <code>Alt + R</code> 啟用正規表示式模式。</li>
+                                <li>輸入 <code>\d2</code> 作為搜尋條件。</li>
+                                <li>按 <code>Enter</code> 開始搜尋。</li>
+                                <li>使用 <code>Alt + W</code> 繼續搜尋下一個匹配項目。</li>
+                                <li>使用 <code>Alt + B</code> 啟用或停用備份檔案功能（Backup files enabled/disabled）。</li>
+                                <li>使用 <code>Alt + B</code> 向上查找符合的結果。</li>
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr style="background-color: cornflowerblue">
+                        <td><code>Alt + W</code></td>
+                        <td>繼續搜尋下一個</td>
+                        <td>搜尋下一個相符的結果</td>
+                    </tr>
+                    <tr style="background-color: cornflowerblue">
+                        <td><code>Alt + B</code></td>
+                        <td>搜尋上一個</td>
+                        <td>搜尋上一個相符的結果</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + K</code></td>
+                        <td>剪下整行</td>
+                        <td>Cut Text，剪下游標所在行</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + U</code></td>
+                        <td>貼上</td>
+                        <td>Uncut Text，貼上剪下的內容</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + G</code></td>
+                        <td>顯示說明</td>
+                        <td>Get Help，顯示所有快捷鍵</td>
+                    </tr>
+                    <tr style="background-color: pink;;">
+                        <td><code>Alt + U</code></td>
+                        <td>復原</td>
+                        <td>Undo，復原上一個操作</td>
+                    </tr>
+                    <tr style="background-color: pink;;">
+                        <td><code>Alt + E</code></td>
+                        <td>重做</td>
+                        <td>Redo，重做已復原的操作</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="first-example">📝 第一個編輯範例</h3>
+
+            <div class="tip-box">
+                <strong>🎯 練習：建立一個簡單的文字檔</strong>
+                <ol>
+                    <li>開啟終端機</li>
+                    <li>輸入 <code>nano hello.txt</code></li>
+                    <li>輸入一些文字：「Hello, nano!」</li>
+                    <li>按 <code>Ctrl + O</code> 儲存</li>
+                    <li>按 Enter 確認檔案名稱</li>
+                    <li>按 <code>Ctrl + X</code> 退出</li>
+                    <li>用 <code>cat hello.txt</code> 確認檔案內容</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 第二部分：詳細內容 -->
+        <div class="detailed-content">
+            <h2 id="part2">🔍 第二部分：詳細概念與操作技巧</h2>
+
+            <h3 id="advanced-features">🛠️ 進階功能</h3>
+
+            <h4>搜尋與替換</h4>
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>快捷鍵</th>
+                        <th>功能</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + W</code></td>
+                        <td>搜尋</td>
+                        <td>搜尋文字，支援正規表示式</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + W</code></td>
+                        <td>繼續搜尋</td>
+                        <td>搜尋下一個相符項目</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + \</code></td>
+                        <td>搜尋並替換</td>
+                        <td>Replace，批量替換文字</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + R</code></td>
+                        <td>正規表示式模式</td>
+                        <td>在搜尋時啟用正規表示式</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>游標移動</h4>
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>快捷鍵</th>
+                        <th>功能</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + A</code></td>
+                        <td>移到行首</td>
+                        <td>游標移動到目前行的開頭</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + E</code></td>
+                        <td>移到行尾</td>
+                        <td>游標移動到目前行的結尾</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Y</code></td>
+                        <td>上一頁</td>
+                        <td>向上捲動一頁</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + V</code></td>
+                        <td>下一頁</td>
+                        <td>向下捲動一頁</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + \</code></td>
+                        <td>跳到行首</td>
+                        <td>移動到檔案第一行</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + /</code></td>
+                        <td>跳到行尾</td>
+                        <td>移動到檔案最後一行</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + _</code></td>
+                        <td>跳到指定行</td>
+                        <td>Go to line，輸入行號跳轉</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>編輯操作</h4>
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>快捷鍵</th>
+                        <th>功能</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Alt + U</code></td>
+                        <td>復原</td>
+                        <td>Undo，復原上一個操作</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + E</code></td>
+                        <td>重做</td>
+                        <td>Redo，重做已復原的操作</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + 6</code></td>
+                        <td>複製行</td>
+                        <td>複製目前行到剪貼簿</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + K</code></td>
+                        <td>剪下行</td>
+                        <td>剪下目前行</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + U</code></td>
+                        <td>貼上</td>
+                        <td>貼上剪下或複製的內容</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + T</code></td>
+                        <td>剪下到行尾</td>
+                        <td>從游標位置剪下到行尾</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + 6</code></td>
+                        <td>開始/結束選取</td>
+                        <td>標記文字選取範圍</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="configuration">⚙️ 設定與自訂</h3>
+
+            <h4>nano 設定檔</h4>
+            <p>nano 的設定檔位於：</p>
+            <ul>
+                <li><strong>系統全域設定</strong>：<code>/etc/nanorc</code></li>
+                <li><strong>使用者個人設定</strong>：<code>~/.nanorc</code></li>
+            </ul>
+
+            <div class="command-box">
+                # 建立個人設定檔<br>
+                nano ~/.nanorc
+            </div>
+
+            <h4>常用設定選項</h4>
+            <div class="command-box">
+                # 顯示行號<br>
+                set linenumbers<br><br>
+
+                # 自動縮排<br>
+                set autoindent<br><br>
+
+                # 設定 Tab 大小為 4 個空格<br>
+                set tabsize 4<br><br>
+
+                # 將 Tab 轉換為空格<br>
+                set tabstospaces<br><br>
+
+                # 啟用軟換行<br>
+                set softwrap<br><br>
+
+                # 啟用滑鼠支援<br>
+                set mouse<br><br>
+
+                # 顯示標題列<br>
+                set titlebar<br><br>
+
+                # 顯示狀態列<br>
+                set statusbar<br><br>
+
+                # 啟用語法高亮<br>
+                include "/usr/share/nano/*.nanorc"<br><br>
+
+                # 設定備份目錄<br>
+                set backupdir "/tmp"<br><br>
+
+                # 建立備份檔案<br>
+                set backup<br><br>
+
+                # 平滑捲動<br>
+                set smooth<br><br>
+
+                # 在搜尋時不區分大小寫<br>
+                set casesensitive
+            </div>
+
+            <h4>語法高亮設定</h4>
+            <p>nano 支援多種程式語言的語法高亮：</p>
+            <div class="command-box">
+                # 檢視可用的語法高亮檔案<br>
+                ls /usr/share/nano/<br><br>
+
+                # 常見的語法檔案<br>
+                /usr/share/nano/python.nanorc # Python<br>
+                /usr/share/nano/html.nanorc # HTML<br>
+                /usr/share/nano/css.nanorc # CSS<br>
+                /usr/share/nano/javascript.nanorc # JavaScript<br>
+                /usr/share/nano/c.nanorc # C/C++<br>
+                /usr/share/nano/sh.nanorc # Shell script
+            </div>
+
+            <h3 id="practical-tips">💡 實用技巧</h3>
+
+            <h4>1. 命令列選項</h4>
+            <div class="command-box">
+                # 開啟檔案並跳到第 20 行<br>
+                nano +20 filename.txt<br><br>
+
+                # 以唯讀模式開啟<br>
+                nano -v filename.txt<br><br>
+
+                # 顯示行號<br>
+                nano -l filename.txt<br><br>
+
+                # 不使用設定檔<br>
+                nano -I filename.txt<br><br>
+
+                # 不自動換行<br>
+                nano -w filename.txt<br><br>
+
+                # 建立備份檔案<br>
+                nano -B filename.txt<br><br>
+
+                # 設定 Tab 大小<br>
+                nano -T 4 filename.txt
+            </div>
+
+            <h4>2. 多檔案編輯</h4>
+            <div class="tip-box">
+                <strong>📁 多檔案操作：</strong>
+                <ul>
+                    <li><code>nano file1.txt file2.txt</code>：同時開啟多個檔案</li>
+                    <li><code>Alt + .</code>：切換到下一個檔案</li>
+                    <li><code>Alt + ,</code>：切換到上一個檔案</li>
+                    <li><code>Ctrl + R</code>：插入其他檔案的內容</li>
+                </ul>
+            </div>
+
+            <h4>3. 文字選取技巧</h4>
+            <ol>
+                <li>按 <code>Ctrl + 6</code> 開始選取</li>
+                <li>移動游標選取文字範圍</li>
+                <li>按 <code>Ctrl + K</code> 剪下選取的文字</li>
+                <li>按 <code>Ctrl + U</code> 貼上</li>
+            </ol>
+
+            <h4>4. 搜尋技巧</h4>
+            <div class="tip-box">
+                <strong>🔍 進階搜尋：</strong>
+                <ul>
+                    <li>按 <code>Ctrl + W</code> 開啟搜尋</li>
+                    <li>按 <code>Alt + R</code> 啟用正規表示式</li>
+                    <li>按 <code>Alt + C</code> 區分大小寫</li>
+                    <li>按 <code>Alt + B</code> 反向搜尋</li>
+                </ul>
+            </div>
+
+            <h4>5. 檔案處理技巧</h4>
+            <div class="command-box">
+                # 檢視檔案內容而不編輯<br>
+                nano -v filename.txt<br><br>
+
+                # 將輸出導向到 nano<br>
+                echo "Hello World" | nano<br><br>
+
+                # 編輯管道輸出<br>
+                ps aux | nano<br><br>
+
+                # 編輯系統設定檔（需要 sudo）<br>
+                sudo nano /etc/hosts
+            </div>
+
+            <h3 id="troubleshooting">🔧 故障排除</h3>
+
+            <h4>常見問題與解決方案</h4>
+
+            <div class="warning-box">
+                <strong>❌ 問題：nano 顯示亂碼</strong><br>
+                <strong>✅ 解決：</strong>
+                <ul>
+                    <li>確認檔案編碼：<code>file filename.txt</code></li>
+                    <li>轉換編碼：<code>iconv -f big5 -t utf-8 filename.txt</code></li>
+                    <li>設定環境變數：<code>export LANG=zh_TW.UTF-8</code></li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ 問題：無法儲存檔案</strong><br>
+                <strong>✅ 解決：</strong>
+                <ul>
+                    <li>檢查檔案權限：<code>ls -l filename.txt</code></li>
+                    <li>使用 sudo：<code>sudo nano filename.txt</code></li>
+                    <li>檢查磁碟空間：<code>df -h</code></li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ 問題：快捷鍵不起作用</strong><br>
+                <strong>✅ 解決：</strong>
+                <ul>
+                    <li>檢查終端機設定</li>
+                    <li>確認沒有與其他程式衝突</li>
+                    <li>重設 nano 設定：<code>nano -I</code></li>
+                </ul>
+            </div>
+
+            <h4>備份與復原</h4>
+            <div class="tip-box">
+                <strong>💾 自動備份設定：</strong>
+                <div class="command-box">
+                    # 在 ~/.nanorc 中加入<br>
+                    set backup<br>
+                    set backupdir "/home/username/nano-backups"
+                </div>
+                <p>這樣 nano 會在每次儲存時建立備份檔案，檔名會加上 ~ 後綴。</p>
+            </div>
+
+            <h3 id="comparison">⚖️ 與其他編輯器比較</h3>
+
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>特性</th>
+                        <th>nano</th>
+                        <th>vim</th>
+                        <th>emacs</th>
+                        <th>Sublime Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>學習難度</strong></td>
+                        <td>很簡單</td>
+                        <td>困難</td>
+                        <td>困難</td>
+                        <td>中等</td>
+                    </tr>
+                    <tr>
+                        <td><strong>操作環境</strong></td>
+                        <td>終端機</td>
+                        <td>終端機</td>
+                        <td>終端機/圖形</td>
+                        <td>圖形介面</td>
+                    </tr>
+                    <tr>
+                        <td><strong>檔案大小支援</strong></td>
+                        <td>中等</td>
+                        <td>大</td>
+                        <td>大</td>
+                        <td>大</td>
+                    </tr>
+                    <tr>
+                        <td><strong>語法高亮</strong></td>
+                        <td>基本</td>
+                        <td>豐富</td>
+                        <td>豐富</td>
+                        <td>豐富</td>
+                    </tr>
+                    <tr>
+                        <td><strong>外掛擴展</strong></td>
+                        <td>有限</td>
+                        <td>豐富</td>
+                        <td>豐富</td>
+                        <td>豐富</td>
+                    </tr>
+                    <tr>
+                        <td><strong>適用場景</strong></td>
+                        <td>快速編輯、初學者</td>
+                        <td>程式開發、進階用戶</td>
+                        <td>程式開發、文件處理</td>
+                        <td>程式開發、文字處理</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>何時選擇 nano？</h4>
+            <div class="info-box">
+                <strong>🎯 nano 最適合的場景：</strong>
+                <ul>
+                    <li><strong>SSH 遠端連線</strong>：編輯伺服器上的設定檔</li>
+                    <li><strong>快速編輯</strong>：簡單的文字檔修改</li>
+                    <li><strong>學習 Linux</strong>：初學者友善的編輯器</li>
+                    <li><strong>系統管理</strong>：編輯系統設定檔</li>
+                    <li><strong>腳本編寫</strong>：簡單的 shell script 編寫</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>🚀 提升效率的最後建議：</strong>
+                <ol>
+                    <li>熟記基本快捷鍵（Ctrl+O, Ctrl+X, Ctrl+W）</li>
+                    <li>設定個人化的 ~/.nanorc 設定檔</li>
+                    <li>善用語法高亮功能</li>
+                    <li>練習搜尋與替換功能</li>
+                    <li>學會使用多檔案編輯功能</li>
+                </ol>
+            </div>
+        </div>
+
+        <div
+            style="text-align: center; margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+            <h3>🎉 恭喜完成 nano 使用教學！</h3>
+            <p>現在您已經掌握了 nano 的基本和進階使用方法。記住，熟能生巧，多練習就能提升編輯效率！</p>
+        </div>
+    </div>
+</body>
+
+</html>
