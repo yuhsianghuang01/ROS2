@@ -60,19 +60,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr style="background-color: #96c6f9;">
                 <td>Gemini API</td>
                 <td>Google</td>
                 <td>使用 Gemini 模型進行開發的 API</td>
                 <td>讓開發者能夠利用 Google DeepMind 的最新 AI 模型進行應用開發</td>
             </tr>
-            <tr>
+            <tr style="background-color: #1285ff;">
                 <td>Cloud Vision API</td>
                 <td>Google Enterprise API</td>
                 <td>圖像內容分析 API</td>
                 <td>支援圖片標籤、物件識別、OCR 等功能</td>
             </tr>
-            <tr>
+            <tr style="background-color: #7fbcfe;">
                 <td>Dialogflow API</td>
                 <td>Google Enterprise API</td>
                 <td>對話介面構建工具</td>
@@ -188,6 +188,362 @@
                 <td>電話模式</td>
                 <td>$0.015 每 15 秒 (約新台幣 0.45 元)</td>
                 <td>專為電話錄音設計的語音轉文字</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <section>
+        <h3>如何呼叫 GCP 的 Cloud Speech-to-Text API</h3>
+        <p>以下是一個簡單的範例程式，示範如何使用 Google Cloud Platform (GCP) 的 Cloud Speech-to-Text API 來進行語音轉文字（Speech-to-Text）的請求。這個範例使用
+            <code>curl</code> 呼叫 REST API，並假設你已經設定好 GCP 專案與服務帳號金鑰。
+        </p>
+
+        <h4>✅ 前置準備</h4>
+        <ul>
+            <li><strong>啟用 Speech-to-Text API：</strong>請至 Google Cloud Console 啟用 Speech-to-Text API。</li>
+            <li><strong>建立服務帳號金鑰：</strong>取得 JSON 格式的服務帳號金鑰檔，例如：<code>your-service-account.json</code>。</li>
+            <li><strong>安裝 gcloud CLI 工具（可選）：</strong>可以使用
+                <code>gcloud auth application-default print-access-token</code> 來取得授權 token。
+            </li>
+            <li><strong>準備語音檔案：</strong>確保有一個 .wav 或 .flac 音訊檔案，例如：<code>audio.raw</code>（建議為 PCM 16kHz 16-bit mono）。
+            </li>
+        </ul>
+
+        <h4>🧪 測試範例：使用 curl 呼叫 Speech-to-Text API</h4>
+        <p>
+            # 1. 取得 access token（需要先登入 gcloud）<br>
+            ACCESS_TOKEN=$(gcloud auth application-default print-access-token)<br><br>
+
+            # 2. 定義 API endpoint<br>
+            API_URL="https://speech.googleapis.com/v1/speech:recognize"<br><br>
+
+            # 3. 建立 JSON 請求內容<br>
+            JSON_REQUEST='{<br>
+            "config": {<br>
+            "encoding": "LINEAR16",<br>
+            "languageCode": "en-US",<br>
+            "sampleRateHertz": 16000<br>
+            },<br>
+            "audio": {<br>
+            "content": "'$(base64 -w0 audio.raw)'"<br>
+            }<br>
+            }'<br><br>
+
+            # 4. 發送 POST 請求<br>
+            curl -X POST \<br>
+            -H "Authorization: Bearer $ACCESS_TOKEN" \<br>
+            -H "Content-Type: application/json; charset=utf-8" \<br>
+            -d "$JSON_REQUEST" $API_URL
+        </p>
+
+        <h4>🔍 請求說明：</h4>
+        <ul>
+            <li><strong>encoding：</strong>音訊格式，此處使用 <code>LINEAR16</code>（PCM 16-bit）。</li>
+            <li><strong>languageCode：</strong>語言代碼，如 <code>en-US</code> 或 <code>zh-TW</code>。</li>
+            <li><strong>sampleRateHertz：</strong>音訊取樣率，需符合音檔規格（常見為 16000 Hz）。</li>
+        </ul>
+
+        <h4>📝 結果範例（回應）：</h4>
+        <pre><code class="language-json">
+{
+  "results": [
+    {
+      "alternatives": [
+    {
+      "transcript": "Hello Google Cloud, this is a test.",
+      "confidence": 0.95
+    }
+      ]
+    }
+  ]
+}
+    </code></pre>
+        </code></pre>
+
+        <h4>📌 注意事項：</h4>
+        <ul>
+            <li>如果你沒有安裝 gcloud CLI，也可以手動產生 OAuth 2.0 Access Token 或使用 Service Account Key 直接簽發 JWT。</li>
+            <li>若語音檔太大（超過 1MB），建議改用 <a
+                    href="https://developers.google.com/speech-to-text/docs/basics#asynchronous_recognition"
+                    target="_blank">非同步請求（speech:longrunningrecognize）</a>。</li>
+            <li>支援語言請參閱官方文件：<a href="https://cloud.google.com/speech-to-text/docs/languages" target="_blank">Cloud
+                    Speech-to-Text 支援語言列表</a>。</li>
+        </ul>
+
+        <h4>📚 參考資源：</h4>
+        <ul>
+            <li><a href="https://codelabs.developers.google.com/codelabs/cloud-speech-api-python" target="_blank">使用
+                    Python 的教學</a></li>
+            <li><a href="https://codelabs.developers.google.com/codelabs/cloud-speech-api-nodejs" target="_blank">使用
+                    Node.js 的教學</a></li>
+            <li><a href="https://cloud.google.com/speech-to-text/docs/streaming-recognize"
+                    target="_blank">即時語音辨識流程說明</a></li>
+        </ul>
+    </section>
+
+    <h3>🤖 Google Cloud AI & ML API 服務詳細說明</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">API 服務名稱</th>
+                <th style="width: 15%;">提供者類型</th>
+                <th style="width: 35%;">核心功能</th>
+                <th style="width: 30%;">詳細說明與應用場景</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 生成式 AI 服務 -->
+            <tr style="background-color: #e8f4fd;">
+                <td><strong>Gemini API</strong></td>
+                <td>Google</td>
+                <td>多模態大型語言模型 API</td>
+                <td>
+                    <strong>功能：</strong>文字生成、對話、程式碼撰寫、圖像理解<br>
+                    <strong>應用：</strong>聊天機器人、內容創作、程式碼助手、多媒體分析<br>
+                    <strong>特色：</strong>支援文字、圖像、音頻等多種輸入格式
+                </td>
+            </tr>
+            <tr style="background-color: #f0f8ff;">
+                <td><strong>Gemini Cloud Assist</strong></td>
+                <td>Google</td>
+                <td>AI 驅動的雲端管理助手</td>
+                <td>
+                    <strong>功能：</strong>即時洞察、應用生命週期管理、智能建議<br>
+                    <strong>應用：</strong>雲端資源優化、成本分析、自動化運維<br>
+                    <strong>特色：</strong>整合 GCP 服務，提供智能化管理建議
+                </td>
+            </tr>
+            <tr style="background-color: #e8f4fd;">
+                <td><strong>Gemini for Google Cloud</strong></td>
+                <td>Google</td>
+                <td>軟體開發 AI 協作夥伴</td>
+                <td>
+                    <strong>功能：</strong>程式碼生成、除錯、部署建議、開發流程優化<br>
+                    <strong>應用：</strong>DevOps 自動化、CI/CD 優化、程式碼審查<br>
+                    <strong>特色：</strong>專為 Google Cloud 開發環境設計
+                </td>
+            </tr>
+
+            <!-- 文檔與資料處理 -->
+            <tr style="background-color: #fff8e1;">
+                <td><strong>Document AI Warehouse</strong></td>
+                <td>Google</td>
+                <td>智能文檔管理平台</td>
+                <td>
+                    <strong>功能：</strong>文檔儲存、搜尋、分析、自動分類<br>
+                    <strong>應用：</strong>企業文檔管理、合規性審查、知識管理<br>
+                    <strong>特色：</strong>結合 AI 進行文檔理解和自動化處理
+                </td>
+            </tr>
+            <tr style="background-color: #ffebee;">
+                <td><strong>Sensitive Data Protection (DLP)</strong></td>
+                <td>Google Enterprise API</td>
+                <td>敏感資料保護服務</td>
+                <td>
+                    <strong>功能：</strong>資料發現、分類、遮罩、監控<br>
+                    <strong>應用：</strong>GDPR 合規、資料安全、隱私保護<br>
+                    <strong>特色：</strong>支援 90+ 種敏感資料類型識別
+                </td>
+            </tr>
+
+            <!-- 機器學習平台 -->
+            <tr style="background-color: #e8f5e8;">
+                <td><strong>Vertex AI API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>統一機器學習開發平台</td>
+                <td>
+                    <strong>功能：</strong>模型訓練、部署、管理、MLOps<br>
+                    <strong>應用：</strong>自訂 ML 模型、AutoML、模型版本管理<br>
+                    <strong>特色：</strong>無程式碼到專家級的完整 ML 工作流程
+                </td>
+            </tr>
+            <tr style="background-color: #f1f8e9;">
+                <td><strong>AI Platform Training & Prediction API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>機器學習模型訓練與預測</td>
+                <td>
+                    <strong>功能：</strong>分散式訓練、模型服務、預測 API<br>
+                    <strong>應用：</strong>大規模 ML 訓練、線上預測服務<br>
+                    <strong>特色：</strong>支援 TensorFlow、PyTorch 等主流框架
+                </td>
+            </tr>
+            <tr style="background-color: #e8f5e8;">
+                <td><strong>Cloud AutoML API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>自動化機器學習模型訓練</td>
+                <td>
+                    <strong>功能：</strong>無程式碼 ML、自動特徵工程、模型選擇<br>
+                    <strong>應用：</strong>快速原型開發、非技術人員 ML 應用<br>
+                    <strong>特色：</strong>最小機器學習專業知識需求
+                </td>
+            </tr>
+
+            <!-- 自然語言處理 -->
+            <tr style="background-color: #f3e5f5;">
+                <td><strong>Cloud Natural Language API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>自然語言理解技術</td>
+                <td>
+                    <strong>功能：</strong>情感分析、實體識別、語法分析、分類<br>
+                    <strong>應用：</strong>客戶回饋分析、內容審查、文本挖掘<br>
+                    <strong>特色：</strong>支援多語言，預訓練模型開箱即用
+                </td>
+            </tr>
+            <tr style="background-color: #fce4ec;">
+                <td><strong>Cloud Translation API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>多語言文本翻譯服務</td>
+                <td>
+                    <strong>功能：</strong>即時翻譯、語言檢測、自訂術語表<br>
+                    <strong>應用：</strong>多語言網站、國際化應用、文檔翻譯<br>
+                    <strong>特色：</strong>支援 100+ 種語言，神經機器翻譯
+                </td>
+            </tr>
+
+            <!-- 語音與影音處理 -->
+            <tr style="background-color: #e1f5fe;">
+                <td><strong>Cloud Speech-to-Text API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>語音識別與轉錄服務</td>
+                <td>
+                    <strong>功能：</strong>語音轉文字、即時轉錄、說話者識別<br>
+                    <strong>應用：</strong>語音助手、會議記錄、客服自動化<br>
+                    <strong>特色：</strong>支援 120+ 語言和方言，雜訊抑制
+                </td>
+            </tr>
+            <tr style="background-color: #f1f8e9;">
+                <td><strong>Cloud Video Intelligence API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>影片內容智能分析</td>
+                <td>
+                    <strong>功能：</strong>物件偵測、場景分析、內容審查、標籤生成<br>
+                    <strong>應用：</strong>媒體監控、內容分類、安全監控<br>
+                    <strong>特色：</strong>支援串流和批次處理，區域指定
+                </td>
+            </tr>
+
+            <!-- 電腦視覺 -->
+            <tr style="background-color: #fff3e0;">
+                <td><strong>Cloud Vision API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>圖像內容分析服務</td>
+                <td>
+                    <strong>功能：</strong>物件識別、OCR、臉部偵測、標籤生成<br>
+                    <strong>應用：</strong>圖片搜尋、文檔數位化、內容審查<br>
+                    <strong>特色：</strong>預訓練模型，支援批次處理和即時分析
+                </td>
+            </tr>
+
+            <!-- 對話式 AI -->
+            <tr style="background-color: #e8f4fd;">
+                <td><strong>Dialogflow API</strong></td>
+                <td>Google Enterprise API</td>
+                <td>對話式介面建構平台</td>
+                <td>
+                    <strong>功能：</strong>意圖識別、實體提取、多輪對話管理<br>
+                    <strong>應用：</strong>聊天機器人、語音助手、客服自動化<br>
+                    <strong>特色：</strong>支援多平台整合，內建 NLU 引擎
+                </td>
+            </tr>
+
+            <!-- 優化與專業服務 -->
+            <tr style="background-color: #f3e5f5;">
+                <td><strong>Cloud Optimization API</strong></td>
+                <td>Google</td>
+                <td>大規模運營優化解決方案</td>
+                <td>
+                    <strong>功能：</strong>路線優化、資源分配、排程最佳化<br>
+                    <strong>應用：</strong>物流配送、資源規劃、供應鏈優化<br>
+                    <strong>特色：</strong>處理複雜約束條件，大規模問題求解
+                </td>
+            </tr>
+            <tr style="background-color: #e0f2f1;">
+                <td><strong>Google Maps for Fleet Routing</strong></td>
+                <td>Google</td>
+                <td>車隊路線規劃專用插件</td>
+                <td>
+                    <strong>功能：</strong>距離矩陣計算、路線優化、即時交通<br>
+                    <strong>應用：</strong>物流配送、共乘服務、車隊管理<br>
+                    <strong>特色：</strong>整合 Google Maps 即時資料
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>📊 各 API 服務分類總覽</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">服務類別</th>
+                <th style="width: 75%;">包含的 API 服務</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #e8f4fd;">
+                <td><strong>🤖 生成式 AI</strong></td>
+                <td>Gemini API、Gemini Cloud Assist、Gemini for Google Cloud</td>
+            </tr>
+            <tr style="background-color: #fff8e1;">
+                <td><strong>📄 文檔與資料處理</strong></td>
+                <td>Document AI Warehouse、Sensitive Data Protection (DLP)</td>
+            </tr>
+            <tr style="background-color: #e8f5e8;">
+                <td><strong>🔬 機器學習平台</strong></td>
+                <td>Vertex AI API、AI Platform Training & Prediction API、Cloud AutoML API</td>
+            </tr>
+            <tr style="background-color: #f3e5f5;">
+                <td><strong>💬 自然語言處理</strong></td>
+                <td>Cloud Natural Language API、Cloud Translation API、Dialogflow API</td>
+            </tr>
+            <tr style="background-color: #e1f5fe;">
+                <td><strong>🎵 語音與影音</strong></td>
+                <td>Cloud Speech-to-Text API、Cloud Video Intelligence API</td>
+            </tr>
+            <tr style="background-color: #fff3e0;">
+                <td><strong>👁️ 電腦視覺</strong></td>
+                <td>Cloud Vision API</td>
+            </tr>
+            <tr style="background-color: #f3e5f5;">
+                <td><strong>⚡ 優化與專業服務</strong></td>
+                <td>Cloud Optimization API、Google Maps for Fleet Routing</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>💡 API 選擇建議</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">應用場景</th>
+                <th style="width: 40%;">推薦 API 組合</th>
+                <th style="width: 30%;">實施難度</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>智能客服系統</strong></td>
+                <td>Dialogflow API + Cloud Natural Language API + Cloud Translation API</td>
+                <td style="color: green;">🟢 初級</td>
+            </tr>
+            <tr>
+                <td><strong>內容創作平台</strong></td>
+                <td>Gemini API + Cloud Vision API + Cloud Translation API</td>
+                <td style="color: orange;">🟡 中級</td>
+            </tr>
+            <tr>
+                <td><strong>企業文檔管理</strong></td>
+                <td>Document AI Warehouse + Cloud Vision API + Sensitive Data Protection</td>
+                <td style="color: orange;">🟡 中級</td>
+            </tr>
+            <tr>
+                <td><strong>多媒體分析平台</strong></td>
+                <td>Cloud Vision API + Cloud Video Intelligence API + Cloud Natural Language API</td>
+                <td style="color: red;">🔴 高級</td>
+            </tr>
+            <tr>
+                <td><strong>AI 開發平台</strong></td>
+                <td>Vertex AI API + Gemini API + AutoML API</td>
+                <td style="color: red;">🔴 高級</td>
             </tr>
         </tbody>
     </table>
