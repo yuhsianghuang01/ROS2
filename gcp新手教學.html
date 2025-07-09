@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud Platform (GCP) 新手教學</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            border-bottom: 3px solid #4285f4;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #34495e;
+            background: linear-gradient(90deg, #e3f2fd, #f8f9fa);
+            padding: 15px;
+            border-left: 6px solid #4285f4;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+
+        h3 {
+            color: #1976d2;
+            margin-top: 25px;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 5px;
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, #e8f5e8, #f0fff0);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 16px rgba(76, 175, 80, 0.1);
+        }
+
+        .advanced-section {
+            background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+            border: 2px solid #9c27b0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+        }
+
+        .command-box {
+            background: linear-gradient(135deg, #263238, #37474f);
+            color: #e0f2f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #4caf50;
+        }
+
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .service-table th,
+        .service-table td {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .service-table th {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            font-weight: 600;
+        }
+
+        .service-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .service-table tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff8e1, #fffde7);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 6px solid #ff9800;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ffebee, #fce4ec);
+            border: 2px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 6px solid #d32f2f;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            border: 2px solid #2196f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 6px solid #1976d2;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 6px solid #388e3c;
+        }
+
+        code {
+            background-color: #f5f5f5;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #d63384;
+        }
+
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 10px 0;
+            padding: 8px 0;
+        }
+
+        .toc a {
+            color: #1976d2;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .toc a:hover {
+            background-color: #e3f2fd;
+            text-decoration: underline;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .pricing-box {
+            background: linear-gradient(135deg, #fff3e0, #fbe9d7);
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #4285f4;
+        }
+
+        .security-highlight {
+            background: linear-gradient(135deg, #fff9c4, #fff59d);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        ul,
+        ol {
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>☁️ Google Cloud Platform (GCP) 新手教學</h1>
+
+        <div class="info-box">
+            <h3>🎯 學習目標</h3>
+            <p>本教學將帶您從零開始學習 Google Cloud Platform，包括帳號設定、核心服務使用、實際操作範例，讓您快速掌握雲端運算的基礎技能。</p>
+        </div>
+
+        <div class="toc">
+            <h3>📋 目錄</h3>
+            <ul>
+                <li><a href="#getting-started">🚀 快速開始</a>
+                    <ul>
+                        <li><a href="#account-setup">帳號設定與註冊</a></li>
+                        <li><a href="#console-overview">控制台介面介紹</a></li>
+                        <li><a href="#first-project">建立第一個專案</a></li>
+                        <li><a href="#billing-setup">計費設定</a></li>
+                    </ul>
+                </li>
+                <li><a href="#core-services">🔧 核心服務介紹</a>
+                    <ul>
+                        <li><a href="#compute-services">運算服務</a></li>
+                        <li><a href="#storage-services">儲存服務</a></li>
+                        <li><a href="#networking-services">網路服務</a></li>
+                        <li><a href="#database-services">資料庫服務</a></li>
+                    </ul>
+                </li>
+                <li><a href="#hands-on">🛠️ 實際操作教學</a>
+                    <ul>
+                        <li><a href="#vm-tutorial">建立虛擬機器</a></li>
+                        <li><a href="#storage-tutorial">檔案儲存實作</a></li>
+                        <li><a href="#webapp-tutorial">部署網站應用</a></li>
+                    </ul>
+                </li>
+                <li><a href="#advanced-topics">📚 進階主題</a>
+                    <ul>
+                        <li><a href="#security-best-practices">安全最佳實務</a></li>
+                        <li><a href="#cost-optimization">成本優化</a></li>
+                        <li><a href="#monitoring">監控與日誌</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 快速開始 -->
+        <div class="quick-start">
+            <h2 id="getting-started">🚀 快速開始</h2>
+
+            <h3 id="account-setup">
+                <span class="step-number">1</span>帳號設定與註冊
+            </h3>
+
+            <div class="info-box">
+                <strong>📝 註冊步驟：</strong>
+                <ol>
+                    <li>前往 <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li>使用 Google 帳號登入（沒有的話需要先註冊）</li>
+                    <li>同意服務條款</li>
+                    <li>選擇國家/地區（台灣）</li>
+                    <li>驗證手機號碼</li>
+                    <li>綁定信用卡（新用戶可獲得 $300 免費額度）</li>
+                </ol>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 新用戶優惠：</strong>
+                <ul>
+                    <li><strong>$300 美元免費額度</strong>：可使用 90 天</li>
+                    <li><strong>Always Free 層級</strong>：部分服務永久免費</li>
+                    <li><strong>Compute Engine</strong>：每月 1 個 f1-micro 執行個體免費</li>
+                    <li><strong>Cloud Storage</strong>：每月 5GB 標準儲存免費</li>
+                </ul>
+            </div>
+
+            <h3 id="console-overview">
+                <span class="step-number">2</span>控制台介面介紹
+            </h3>
+
+            <div class="service-card">
+                <strong>🎛️ 主要介面組件：</strong>
+                <ul>
+                    <li><strong>導航選單</strong>：左側的漢堡選單，包含所有服務</li>
+                    <li><strong>專案選擇器</strong>：頂部的專案下拉選單</li>
+                    <li><strong>搜尋列</strong>：快速找到服務和資源</li>
+                    <li><strong>通知中心</strong>：右上角的鈴鐺圖示</li>
+                    <li><strong>使用者設定</strong>：右上角的個人頭像</li>
+                    <li><strong>Cloud Shell</strong>：右上角的終端圖示</li>
+                </ul>
+            </div>
+
+            <h3 id="first-project">
+                <span class="step-number">3</span>建立第一個專案
+            </h3>
+
+            <div class="command-box">
+                # 透過 Cloud Shell 建立專案<br>
+                gcloud projects create my-first-project --name="我的第一個專案"<br><br>
+
+                # 設定為目前專案<br>
+                gcloud config set project my-first-project<br><br>
+
+                # 查看專案資訊<br>
+                gcloud projects describe my-first-project
+            </div>
+
+            <div class="success-box">
+                <strong>✅ 專案建立成功後，您可以：</strong>
+                <ul>
+                    <li>啟用所需的 API 服務</li>
+                    <li>建立和管理資源</li>
+                    <li>設定權限和存取控制</li>
+                    <li>監控使用量和費用</li>
+                </ul>
+            </div>
+
+            <h3 id="billing-setup">
+                <span class="step-number">4</span>計費設定
+            </h3>
+
+            <div class="pricing-box">
+                <strong>💳 計費帳戶設定步驟：</strong>
+                <ol>
+                    <li>前往「計費」頁面</li>
+                    <li>建立計費帳戶</li>
+                    <li>輸入信用卡資訊</li>
+                    <li>將專案連結到計費帳戶</li>
+                    <li>設定預算提醒</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 重要提醒：</strong>
+                <ul>
+                    <li>即使有免費額度，仍需綁定信用卡</li>
+                    <li>務必設定預算提醒避免意外費用</li>
+                    <li>定期檢查使用量報告</li>
+                    <li>不用的資源要及時刪除</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 核心服務 -->
+        <div class="advanced-section">
+            <h2 id="core-services">🔧 核心服務介紹</h2>
+
+            <h3 id="compute-services">⚡ 運算服務</h3>
+
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th>服務名稱</th>
+                        <th>用途</th>
+                        <th>適用場景</th>
+                        <th>計費方式</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Compute Engine</strong></td>
+                        <td>虛擬機器</td>
+                        <td>傳統應用、完整控制</td>
+                        <td>按分鐘計費</td>
+                    </tr>
+                    <tr>
+                        <td><strong>App Engine</strong></td>
+                        <td>無伺服器應用</td>
+                        <td>Web 應用、自動擴展</td>
+                        <td>按請求計費</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud Functions</strong></td>
+                        <td>事件驅動函數</td>
+                        <td>微服務、API</td>
+                        <td>按執行次數計費</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud Run</strong></td>
+                        <td>容器化應用</td>
+                        <td>Docker 應用</td>
+                        <td>按請求計費</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kubernetes Engine (GKE)</strong></td>
+                        <td>容器編排</td>
+                        <td>大型應用、微服務</td>
+                        <td>按節點計費</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="storage-services">💾 儲存服務</h3>
+
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th>服務名稱</th>
+                        <th>類型</th>
+                        <th>適用場景</th>
+                        <th>特色</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cloud Storage</strong></td>
+                        <td>物件儲存</td>
+                        <td>檔案備份、靜態網站</td>
+                        <td>全球分散、高可用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Persistent Disk</strong></td>
+                        <td>區塊儲存</td>
+                        <td>VM 硬碟、資料庫</td>
+                        <td>高效能、可擴展</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Filestore</strong></td>
+                        <td>檔案儲存</td>
+                        <td>共享檔案系統</td>
+                        <td>NFS 相容</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="networking-services">🌐 網路服務</h3>
+
+            <div class="service-card">
+                <strong>主要網路服務：</strong>
+                <ul>
+                    <li><strong>VPC (Virtual Private Cloud)</strong>：私有虛擬網路</li>
+                    <li><strong>Cloud Load Balancing</strong>：負載均衡器</li>
+                    <li><strong>Cloud CDN</strong>：內容分發網路</li>
+                    <li><strong>Cloud Interconnect</strong>：專線連接</li>
+                    <li><strong>Cloud VPN</strong>：VPN 連接</li>
+                    <li><strong>Cloud DNS</strong>：DNS 服務</li>
+                </ul>
+            </div>
+
+            <h3 id="database-services">🗄️ 資料庫服務</h3>
+
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th>服務名稱</th>
+                        <th>資料庫類型</th>
+                        <th>特色</th>
+                        <th>適用場景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cloud SQL</strong></td>
+                        <td>關聯式資料庫</td>
+                        <td>MySQL, PostgreSQL, SQL Server</td>
+                        <td>傳統應用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud Spanner</strong></td>
+                        <td>全球分散式 SQL</td>
+                        <td>強一致性、水平擴展</td>
+                        <td>大型企業應用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Firestore</strong></td>
+                        <td>NoSQL 文件資料庫</td>
+                        <td>即時同步、離線支援</td>
+                        <td>行動應用、Web 應用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bigtable</strong></td>
+                        <td>NoSQL 寬列資料庫</td>
+                        <td>低延遲、高吞吐量</td>
+                        <td>分析、IoT</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 實際操作 -->
+        <div class="quick-start">
+            <h2 id="hands-on">🛠️ 實際操作教學</h2>
+
+            <h3 id="vm-tutorial">
+                <span class="step-number">1</span>建立虛擬機器 (Compute Engine)
+            </h3>
+
+            <div class="command-box">
+                # 使用 gcloud 建立 VM<br>
+                gcloud compute instances create my-vm \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--zone=asia-east1-a \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--machine-type=e2-micro \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--subnet=default \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--image-family=ubuntu-2004-lts \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--image-project=ubuntu-os-cloud \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--boot-disk-size=10GB \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--tags=http-server<br><br>
+
+                # 連接到 VM<br>
+                gcloud compute ssh my-vm --zone=asia-east1-a<br><br>
+
+                # 查看 VM 列表<br>
+                gcloud compute instances list
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 VM 操作技巧：</strong>
+                <ul>
+                    <li><strong>選擇適當區域</strong>：asia-east1 (台灣) 延遲最低</li>
+                    <li><strong>機器類型</strong>：e2-micro 適合輕量工作負載</li>
+                    <li><strong>預先配置映像</strong>：節省設定時間</li>
+                    <li><strong>設定防火牆規則</strong>：控制網路存取</li>
+                </ul>
+            </div>
+
+            <h3 id="storage-tutorial">
+                <span class="step-number">2</span>檔案儲存實作 (Cloud Storage)
+            </h3>
+
+            <div class="command-box">
+                # 建立儲存貯體<br>
+                gsutil mb -p my-first-project -c STANDARD -l asia-east1 gs://my-unique-bucket-name<br><br>
+
+                # 上傳檔案<br>
+                gsutil cp local-file.txt gs://my-unique-bucket-name/<br><br>
+
+                # 下載檔案<br>
+                gsutil cp gs://my-unique-bucket-name/local-file.txt ./downloaded-file.txt<br><br>
+
+                # 列出貯體內容<br>
+                gsutil ls gs://my-unique-bucket-name<br><br>
+
+                # 設定公開存取<br>
+                gsutil acl ch -u AllUsers:R gs://my-unique-bucket-name/local-file.txt
+            </div>
+
+            <h3 id="webapp-tutorial">
+                <span class="step-number">3</span>部署網站應用 (App Engine)
+            </h3>
+
+            <div class="command-box">
+                # 建立應用程式<br>
+                gcloud app create --region=asia-northeast1<br><br>
+
+                # 建立 app.yaml 設定檔<br>
+                echo 'runtime: python39' > app.yaml<br><br>
+
+                # 建立簡單的 Python 應用<br>
+                cat > main.py << 'EOF' <br>
+                    from flask import Flask<br>
+                    app = Flask(__name__)<br><br>
+
+                    @app.route('/')<br>
+                    def hello():<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 'Hello, GCP World!'<br><br>
+
+                    if __name__ == '__main__':<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;app.run(host='127.0.0.1', port=8080, debug=True)<br>
+                    EOF<br><br>
+
+                    # 建立 requirements.txt<br>
+                    echo 'Flask==2.0.1' > requirements.txt<br><br>
+
+                    # 部署應用<br>
+                    gcloud app deploy<br><br>
+
+                    # 開啟應用<br>
+                    gcloud app browse
+            </div>
+
+            <div class="success-box">
+                <strong>🎉 恭喜！您已成功：</strong>
+                <ul>
+                    <li>建立了一個虛擬機器</li>
+                    <li>設定了雲端儲存</li>
+                    <li>部署了第一個 Web 應用</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 進階主題 -->
+        <div class="advanced-section">
+            <h2 id="advanced-topics">📚 進階主題</h2>
+
+            <h3 id="security-best-practices">🔒 安全最佳實務</h3>
+
+            <div class="security-highlight">
+                <strong>🛡️ 關鍵安全措施：</strong>
+                <ul>
+                    <li><strong>身分與存取管理 (IAM)</strong>
+                        <ul>
+                            <li>使用最小權限原則</li>
+                            <li>定期審查權限</li>
+                            <li>使用服務帳戶</li>
+                        </ul>
+                    </li>
+                    <li><strong>網路安全</strong>
+                        <ul>
+                            <li>設定防火牆規則</li>
+                            <li>使用私人 IP</li>
+                            <li>啟用 VPC Flow Logs</li>
+                        </ul>
+                    </li>
+                    <li><strong>資料保護</strong>
+                        <ul>
+                            <li>啟用靜態加密</li>
+                            <li>使用 Cloud KMS</li>
+                            <li>定期備份資料</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="command-box">
+                # IAM 權限管理範例<br>
+                # 為使用者授予檢視權限<br>
+                gcloud projects add-iam-policy-binding my-first-project \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--member="user:user@example.com" \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--role="roles/viewer"<br><br>
+
+                # 建立服務帳戶<br>
+                gcloud iam service-accounts create my-service-account \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--description="My service account" \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--display-name="My Service Account"<br><br>
+
+                # 產生服務帳戶金鑰<br>
+                gcloud iam service-accounts keys create ~/key.json \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--iam-account=my-service-account@my-first-project.iam.gserviceaccount.com
+            </div>
+
+            <h3 id="cost-optimization">💰 成本優化</h3>
+
+            <div class="pricing-box">
+                <strong>💡 節省成本的策略：</strong>
+                <ul>
+                    <li><strong>選擇適當的機器類型</strong>
+                        <ul>
+                            <li>使用預搶式執行個體 (最多可省 80%)</li>
+                            <li>考慮承諾使用折扣</li>
+                            <li>定期檢視建議</li>
+                        </ul>
+                    </li>
+                    <li><strong>儲存成本優化</strong>
+                        <ul>
+                            <li>選擇適當的儲存類別</li>
+                            <li>設定生命週期政策</li>
+                            <li>刪除不需要的快照</li>
+                        </ul>
+                    </li>
+                    <li><strong>監控與提醒</strong>
+                        <ul>
+                            <li>設定預算提醒</li>
+                            <li>使用計費導出功能</li>
+                            <li>定期審查使用量</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="command-box">
+                # 建立預算提醒<br>
+                gcloud beta billing budgets create \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--billing-account=BILLING_ACCOUNT_ID \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--display-name="My Budget" \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--budget-amount=100USD \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--threshold-rule=percent:50 \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--threshold-rule=percent:90<br><br>
+
+                # 查看計費資訊<br>
+                gcloud billing accounts list<br>
+                gcloud billing projects list --billing-account=BILLING_ACCOUNT_ID
+            </div>
+
+            <h3 id="monitoring">📊 監控與日誌</h3>
+
+            <div class="service-card">
+                <strong>🔍 監控工具：</strong>
+                <ul>
+                    <li><strong>Cloud Monitoring</strong>：效能監控和提醒</li>
+                    <li><strong>Cloud Logging</strong>：集中化日誌管理</li>
+                    <li><strong>Cloud Trace</strong>：分散式追蹤</li>
+                    <li><strong>Cloud Profiler</strong>：應用程式效能分析</li>
+                </ul>
+            </div>
+
+            <div class="command-box">
+                # 查看日誌<br>
+                gcloud logging read "resource.type=gce_instance" --limit=10<br><br>
+
+                # 建立提醒政策<br>
+                gcloud alpha monitoring policies create --policy-from-file=policy.yaml<br><br>
+
+                # 查看監控指標<br>
+                gcloud monitoring metrics list --filter="metric.type:compute"
+            </div>
+        </div>
+
+        <!-- 常用命令參考 -->
+        <div class="quick-start">
+            <h2>📚 常用命令參考</h2>
+
+            <h3>🔧 基本設定命令</h3>
+            <div class="command-box">
+                # 設定預設專案<br>
+                gcloud config set project PROJECT_ID<br><br>
+
+                # 設定預設區域<br>
+                gcloud config set compute/zone asia-east1-a<br><br>
+
+                # 設定預設地區<br>
+                gcloud config set compute/region asia-east1<br><br>
+
+                # 查看設定<br>
+                gcloud config list<br><br>
+
+                # 登入<br>
+                gcloud auth login<br><br>
+
+                # 初始化<br>
+                gcloud init
+            </div>
+
+            <h3>⚡ Compute Engine 常用命令</h3>
+            <div class="command-box">
+                # 列出所有執行個體<br>
+                gcloud compute instances list<br><br>
+
+                # 啟動執行個體<br>
+                gcloud compute instances start INSTANCE_NAME --zone=ZONE<br><br>
+
+                # 停止執行個體<br>
+                gcloud compute instances stop INSTANCE_NAME --zone=ZONE<br><br>
+
+                # 刪除執行個體<br>
+                gcloud compute instances delete INSTANCE_NAME --zone=ZONE<br><br>
+
+                # 取得執行個體資訊<br>
+                gcloud compute instances describe INSTANCE_NAME --zone=ZONE
+            </div>
+
+            <h3>💾 Cloud Storage 常用命令</h3>
+            <div class="command-box">
+                # 列出所有貯體<br>
+                gsutil ls<br><br>
+
+                # 同步資料夾<br>
+                gsutil -m rsync -r local-dir gs://bucket-name/remote-dir<br><br>
+
+                # 設定貯體權限<br>
+                gsutil iam ch user:user@example.com:objectViewer gs://bucket-name<br><br>
+
+                # 刪除貯體<br>
+                gsutil rm -r gs://bucket-name<br><br>
+
+                # 查看貯體資訊<br>
+                gsutil ls -L -b gs://bucket-name
+            </div>
+        </div>
+
+        <!-- 故障排除 -->
+        <div class="advanced-section">
+            <h2>🔧 故障排除指南</h2>
+
+            <h3>❌ 常見問題與解決方案</h3>
+
+            <div class="warning-box">
+                <strong>問題 1：無法建立執行個體</strong><br>
+                <strong>可能原因：</strong>
+                <ul>
+                    <li>配額不足</li>
+                    <li>API 未啟用</li>
+                    <li>權限不足</li>
+                </ul>
+                <strong>解決方案：</strong>
+                <ul>
+                    <li>檢查配額限制：<code>gcloud compute project-info describe</code></li>
+                    <li>啟用 Compute Engine API</li>
+                    <li>確認 IAM 權限</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>問題 2：無法連接到執行個體</strong><br>
+                <strong>可能原因：</strong>
+                <ul>
+                    <li>防火牆規則阻擋</li>
+                    <li>SSH 金鑰問題</li>
+                    <li>執行個體未啟動</li>
+                </ul>
+                <strong>解決方案：</strong>
+                <ul>
+                    <li>檢查防火牆規則：<code>gcloud compute firewall-rules list</code></li>
+                    <li>重新產生 SSH 金鑰</li>
+                    <li>確認執行個體狀態</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>問題 3：帳單費用過高</strong><br>
+                <strong>預防措施：</strong>
+                <ul>
+                    <li>設定預算提醒</li>
+                    <li>定期檢查計費報告</li>
+                    <li>刪除不使用的資源</li>
+                    <li>使用預搶式執行個體</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 學習資源 -->
+        <div class="info-box">
+            <h2>📖 推薦學習資源</h2>
+            <ul>
+                <li><strong>官方文件</strong>：<a href="https://cloud.google.com/docs"
+                        target="_blank">cloud.google.com/docs</a></li>
+                <li><strong>Qwiklabs</strong>：實作式學習平台</li>
+                <li><strong>Coursera GCP 課程</strong>：專業認證課程</li>
+                <li><strong>YouTube 官方頻道</strong>：Google Cloud Tech</li>
+                <li><strong>技術白皮書</strong>：深入技術文件</li>
+                <li><strong>社群論壇</strong>：Stack Overflow、Reddit</li>
+            </ul>
+        </div>
+
+        <!-- 認證路徑 -->
+        <div class="success-box">
+            <h2>🏆 GCP 認證路徑</h2>
+            <h3>基礎認證：</h3>
+            <ul>
+                <li><strong>Cloud Digital Leader</strong>：雲端基礎概念</li>
+            </ul>
+            <h3>專業認證：</h3>
+            <ul>
+                <li><strong>Professional Cloud Architect</strong>：解決方案架構</li>
+                <li><strong>Professional Data Engineer</strong>：資料工程</li>
+                <li><strong>Professional Cloud Developer</strong>：應用程式開發</li>
+                <li><strong>Professional Cloud DevOps Engineer</strong>：DevOps 實作</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <h3>🎉 恭喜完成 GCP 新手教學！</h3>
+            <p>現在您已經具備了 Google Cloud Platform 的基礎知識。記住，雲端技術日新月異，持續學習和實作是掌握技能的關鍵。</p>
+            <p><strong>下一步建議：</strong>選擇一個小專案開始實作，並逐步探索更多 GCP 服務！</p>
+        </div>
+    </div>
+</body>
+
+</html>

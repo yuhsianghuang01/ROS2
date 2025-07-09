@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud Platform (GCP) 新手教學</title>
+    <style>
+        /* 參考樣式，與您提供的樣式一致 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            border-bottom: 3px solid #4285f4;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2,
+        h3 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+
+        .info-box,
+        .tip-box,
+        .warning-box,
+        .success-box {
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            border: 2px solid #2196f3;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff8e1, #fffde7);
+            border: 2px solid #ffc107;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ffebee, #fce4ec);
+            border: 2px solid #f44336;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border: 2px solid #4caf50;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .command-box {
+            background: linear-gradient(135deg, #263238, #37474f);
+            color: #e0f2f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #4caf50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>☁️ Google Cloud Platform (GCP) 新手教學_02</h1>
+
+        <!-- 學習目標 -->
+        <div class="info-box">
+            <h3>🎯 學習目標</h3>
+            <p>在這一頁中，我們將整理學習過程中遇到的問題與解答，並記錄學到的知識點。</p>
+        </div>
+
+        <!-- 問題與解答 -->
+        <div class="tip-box">
+            <h3>📋 學習時想到的問題與解答</h3>
+            <ul>
+                <li><strong>問題 1：</strong>Cloud Shell 和 Cloud Shell CLI 有什麼差別？</li>
+                <li><strong>問題 2：</strong>什麼是SKU和 SKU 分组？</li>
+                <li><strong>問題 3：</strong>如何使用 gcloud CLI 列出所有專案？</li>
+                <li><strong>問題 4：</strong>...</li>
+            </ul>
+        </div>
+
+        <!-- Cloud Shell vs Cloud Shell CLI 詳細說明 -->
+        <div class="info-box">
+            <h2>☁️ Cloud Shell vs Cloud Shell CLI 差別說明</h2>
+
+            <h3>🌐 Cloud Shell（雲端殼層）</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+                <strong>📝 定義：</strong>
+                <p>Cloud Shell 是一個基於瀏覽器的完整 Linux 開發環境，由 Google 免費提供。</p>
+
+                <strong>🎯 主要特色：</strong>
+                <ul>
+                    <li><strong>完整的虛擬機器</strong>：Debian Linux 環境</li>
+                    <li><strong>5GB 永久儲存空間</strong>：$HOME 目錄會保存</li>
+                    <li><strong>預安裝工具</strong>：gcloud、kubectl、docker、git 等</li>
+                    <li><strong>內建程式碼編輯器</strong>：類似 VS Code 的網頁編輯器</li>
+                    <li><strong>網頁預覽功能</strong>：可預覽 Web 應用</li>
+                    <li><strong>免費使用</strong>：每週 50 小時免費額度</li>
+                </ul>
+
+                <strong>🔧 如何啟動：</strong>
+                <div class="command-box">
+                    # 在 GCP Console 右上角點擊終端圖示<br>
+                    # 或前往：https://shell.cloud.google.com/
+                </div>
+            </div>
+
+            <h3>⚡ Cloud Shell CLI（命令列介面）</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+                <strong>📝 定義：</strong>
+                <p>Cloud Shell CLI 是指在 Cloud Shell 環境中使用的命令列工具集合。</p>
+
+                <strong>🛠️ 包含的工具：</strong>
+                <ul>
+                    <li><strong>gcloud CLI</strong>：Google Cloud 主要命令工具</li>
+                    <li><strong>gsutil</strong>：Cloud Storage 操作工具</li>
+                    <li><strong>kubectl</strong>：Kubernetes 管理工具</li>
+                    <li><strong>bq</strong>：BigQuery 命令列工具</li>
+                    <li><strong>terraform</strong>：基礎設施即程式碼工具</li>
+                    <li><strong>docker</strong>：容器管理工具</li>
+                </ul>
+
+                <strong>💡 常用命令範例：</strong>
+                <div class="command-box">
+                    # gcloud CLI 範例<br>
+                    gcloud projects list<br>
+                    gcloud compute instances list<br><br>
+
+                    # gsutil 範例<br>
+                    gsutil ls<br>
+                    gsutil cp file.txt gs://bucket-name/<br><br>
+
+                    # kubectl 範例<br>
+                    kubectl get pods<br>
+                    kubectl apply -f deployment.yaml
+                </div>
+            </div>
+
+            <h3>📊 詳細比較表格</h3>
+            <table
+                style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background: linear-gradient(135deg, #4285f4, #1976d2); color: white;">
+                        <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">項目</th>
+                        <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">Cloud Shell</th>
+                        <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">Cloud Shell CLI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>類型</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">完整的雲端開發環境</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">命令列工具集合</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>存取方式</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">瀏覽器 + 終端</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">命令列介面</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>儲存空間</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">5GB 永久儲存</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">N/A（使用 Cloud Shell 的儲存）</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>預安裝工具</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">100+ 開發工具</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">Google Cloud 特定 CLI 工具</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>程式碼編輯</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">內建網頁編輯器</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">需使用 vim/nano 等編輯器</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>網頁預覽</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">支援（Web Preview）</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">不支援</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>作業系統</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">Debian Linux</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">N/A（在 Cloud Shell 中執行）</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>費用</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">免費（50小時/週）</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">免費</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <h3>🎯 實際使用場景</h3>
+
+            <h4>🌐 使用 Cloud Shell 的情況：</h4>
+            <ul>
+                <li>需要完整的開發環境</li>
+                <li>要編輯較大的程式碼專案</li>
+                <li>需要圖形化介面操作</li>
+                <li>要預覽 Web 應用程式</li>
+                <li>進行多工作並行</li>
+            </ul>
+
+            <h4>⚡ 使用 Cloud Shell CLI 的情況：</h4>
+            <ul>
+                <li>快速執行 Google Cloud 命令</li>
+                <li>自動化腳本執行</li>
+                <li>簡單的資源管理操作</li>
+                <li>CI/CD 管道中的命令</li>
+                <li>一次性的管理任務</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h3>🔗 兩者的關係</h3>
+            <p><strong>Cloud Shell CLI 是 Cloud Shell 環境的一部分</strong>：</p>
+            <ul>
+                <li>當您啟動 Cloud Shell 時，所有 CLI 工具都已經預安裝好了</li>
+                <li>您可以在 Cloud Shell 的終端中使用所有的 CLI 命令</li>
+                <li>Cloud Shell 提供了使用 CLI 工具的最佳環境</li>
+                <li>不需要額外安裝或設定，開箱即用</li>
+            </ul>
+        </div>
+
+        <!-- 知識點 -->
+        <div class="success-box">
+            <h3>📚 學到的知識點</h3>
+            <ul>
+                <li>Cloud Shell 是一個基於瀏覽器的完整 Linux 開發環境。</li>
+                <li>Cloud Shell CLI 是在 Cloud Shell 環境中使用的命令列工具集合。</li>
+                <li>gcloud CLI 是 Google Cloud 的主要命令工具。</li>
+                <li><strong>SKU (Stock Keeping Unit)</strong> 是 GCP 中的計費單位，每個可計費項目都有唯一的 SKU。</li>
+                <li><strong>SKU 分組</strong>是將相關 SKU 組織在一起的邏輯分類，用於簡化計費管理。</li>
+                <li>了解 SKU 有助於成本優化和精確的預算規劃。</li>
+                <li>可以使用 <code>gcloud billing skus list</code> 命令查看所有可用的 SKU。</li>
+                <li>不同區域的相同服務可能有不同的 SKU 定價。</li>
+            </ul>
+        </div>
+
+        <!-- 常用命令 -->
+        <div class="info-box">
+            <h3>💡 常用命令範例</h3>
+            <div class="command-box">
+                # 列出所有專案<br>
+                gcloud projects list<br><br>
+
+                # 列出所有 VM 實例<br>
+                gcloud compute instances list<br><br>
+
+                # 查看所有可用的 SKU<br>
+                gcloud billing skus list<br><br>
+
+                # 查看特定服務的 SKU<br>
+                gcloud billing skus list --filter="serviceDisplayName:Compute Engine"<br><br>
+
+                # 查看計費帳戶<br>
+                gcloud billing accounts list<br><br>
+
+                # 查看專案的計費資訊<br>
+                gcloud billing projects describe PROJECT_ID
+            </div>
+        </div>
+
+        <!-- 注意事項 -->
+        <div class="warning-box">
+            <h3>⚠️ 重要注意事項</h3>
+            <ul>
+                <li><strong>會話超時</strong>：Cloud Shell 會話在 20 分鐘不活動後會終止</li>
+                <li><strong>使用限制</strong>：每週 50 小時的免費使用時間</li>
+                <li><strong>網路存取</strong>：某些網路環境可能限制存取</li>
+                <li><strong>效能限制</strong>：適合輕到中等的工作負載</li>
+                <li><strong>資料保存</strong>：只有 $HOME 目錄的資料會永久保存</li>
+            </ul>
+        </div>
+
+        <!-- 總結 -->
+        <div class="success-box">
+            <h3>🎯 總結</h3>
+            <ul>
+                <li><strong>Cloud Shell</strong> = 完整的雲端開發環境（包含終端、編輯器、預覽等）</li>
+                <li><strong>Cloud Shell CLI</strong> = 在該環境中使用的命令列工具集合</li>
+                <li>簡單來說，<strong>Cloud Shell</strong> 是「房子」，而 <strong>Cloud Shell CLI</strong> 是「房子裡的工具」</li>
+                <li>當您使用 Cloud Shell 時，所有的 CLI 工具都已經準備好讓您使用了！</li>
+            </ul>
+        </div>
+
+        <!-- SKU 和 SKU 分組詳細說明 -->
+        <div class="info-box">
+            <h2>💰 SKU 和 SKU 分組詳細說明</h2>
+
+            <h3>📝 什麼是 SKU？</h3>
+            <div style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+                <strong>📖 SKU 定義：</strong>
+                <p><strong>SKU (Stock Keeping Unit)</strong> 在 GCP 中是指<strong>計費單位</strong>，代表特定服務的可計費項目。每個 SKU 都有唯一的識別碼和計費規則。</p>
+
+                <strong>🎯 SKU 的主要特徵：</strong>
+                <ul>
+                    <li><strong>唯一識別</strong>：每個 SKU 都有唯一的 ID</li>
+                    <li><strong>服務特定</strong>：綁定到特定的 GCP 服務</li>
+                    <li><strong>計費基礎</strong>：定義如何計算使用量和費用</li>
+                    <li><strong>區域相關</strong>：可能因地理區域而有不同定價</li>
+                    <li><strong>時間敏感</strong>：計費方式可能隨時間變化</li>
+                </ul>
+
+                <strong>💡 SKU 範例：</strong>
+                <div class="command-box">
+                    # Compute Engine VM 的 SKU 範例<br>
+                    # n1-standard-1 機器在 us-central1 區域的 CPU 使用量<br>
+                    SKU ID: 6F81-5844-456A<br>
+                    Description: "N1 Predefined Instance Core running in Americas"<br><br>
+
+                    # Cloud Storage 的 SKU 範例<br>
+                    # Standard 儲存在 us-central1 的每月儲存費用<br>
+                    SKU ID: 95FF-2EF5-5EA1<br>
+                    Description: "Standard Storage US Regional"
+                </div>
+            </div>
+
+            <h3>📊 什麼是 SKU 分組？</h3>
+            <div style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+                <strong>📖 SKU 分組定義：</strong>
+                <p><strong>SKU 分組 (SKU Groups)</strong> 是將相關的 SKU 組織在一起的邏輯分類，用於簡化計費管理和成本分析。</p>
+
+                <strong>🗂️ 常見的 SKU 分組：</strong>
+                <ul>
+                    <li><strong>按服務分組</strong>：Compute Engine、Cloud Storage、BigQuery</li>
+                    <li><strong>按資源類型分組</strong>：CPU、記憶體、儲存、網路</li>
+                    <li><strong>按地理區域分組</strong>：美洲、歐洲、亞太地區</li>
+                    <li><strong>按使用模式分組</strong>：按需計費、承諾使用折扣、預搶式</li>
+                </ul>
+
+                <strong>📋 SKU 分組範例：</strong>
+                <div class="command-box">
+                    # 查看特定服務的 SKU<br>
+                    gcloud billing skus list --service=services/6F81-5844-456A<br><br>
+
+                    # 按服務篩選 SKU<br>
+                    gcloud billing skus list --filter="serviceDisplayName:Compute Engine"<br><br>
+
+                    # 查看所有可用服務<br>
+                    gcloud billing services list
+                </div>
+            </div>
+
+            <h3>🔍 SKU 的詳細結構</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background: linear-gradient(135deg, #4285f4, #1976d2); color: white;">
+                        <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">SKU 屬性</th>
+                        <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">說明</th>
+                        <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">範例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>SKU ID</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">唯一識別碼</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">6F81-5844-456A</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Name</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">SKU 名稱</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">N1 Predefined Instance Core</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Description</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">詳細描述</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">N1 Predefined Instance Core running in Americas</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Category</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">資源類別</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">Compute、Storage、Network</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Service</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">所屬服務</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">Compute Engine、Cloud Storage</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Pricing Info</strong></td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">計費資訊</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">每小時 $0.0475 USD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <h3>🛠️ 如何查看和管理 SKU</h3>
+
+            <h4>📋 常用 SKU 管理命令：</h4>
+            <div class="command-box">
+                # 列出所有可用的 SKU<br>
+                gcloud billing skus list<br><br>
+
+                # 搜尋特定服務的 SKU<br>
+                gcloud billing skus list --filter="serviceDisplayName:Compute Engine"<br><br>
+
+                # 查看特定 SKU 的詳細資訊<br>
+                gcloud billing skus describe SKU_ID<br><br>
+
+                # 按區域篩選 SKU<br>
+                gcloud billing skus list --filter="serviceRegions:us-central1"<br><br>
+
+                # 查看 SKU 的定價資訊<br>
+                gcloud billing skus list --filter="name:*standard*" --format="table(name,description,category,serviceRegions[0]:label=REGION)"
+            </div>
+
+            <h4>💰 實用的 SKU 查詢範例：</h4>
+            <div class="command-box">
+                # 查看 Compute Engine 所有機器類型的 SKU<br>
+                gcloud billing skus list \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--filter="serviceDisplayName:'Compute Engine' AND category:'Compute'" \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--format="table(name,description,category,serviceRegions[0])"<br><br>
+
+                # 查看 Cloud Storage 的所有 SKU<br>
+                gcloud billing skus list \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--filter="serviceDisplayName:'Cloud Storage'" \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--format="table(name,description,category)"<br><br>
+
+                # 查看特定區域的所有 SKU<br>
+                gcloud billing skus list \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--filter="serviceRegions:asia-east1" \<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;--format="table(name,description,serviceDisplayName)"
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h3>💡 SKU 使用的最佳實務</h3>
+            <ul>
+                <li><strong>定期檢查 SKU 變更</strong>：Google 可能會調整定價或新增 SKU</li>
+                <li><strong>了解計費模式</strong>：不同 SKU 有不同的計費週期（秒、分鐘、小時）</li>
+                <li><strong>區域選擇影響</strong>：同樣的服務在不同區域可能有不同的 SKU 定價</li>
+                <li><strong>承諾使用折扣</strong>：長期使用可透過 CUD (Committed Use Discounts) 節省成本</li>
+                <li><strong>監控使用量</strong>：設定預算提醒避免意外費用</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h3>🎯 為什麼要了解 SKU？</h3>
+            <ul>
+                <li><strong>成本優化</strong>：了解每個資源的實際計費方式</li>
+                <li><strong>預算規劃</strong>：精確預估專案所需費用</li>
+                <li><strong>資源選擇</strong>：選擇最符合需求且成本效益高的資源</li>
+                <li><strong>費用分析</strong>：深入分析哪些服務產生最多費用</li>
+                <li><strong>自動化管理</strong>：透過 API 自動監控和管理計費</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
