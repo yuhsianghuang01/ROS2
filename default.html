@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROS2 學習資源總覽</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            border-bottom: 3px solid #4285f4;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #4285f4;
+            padding-left: 15px;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .file-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #4285f4;
+        }
+
+        .file-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .file-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .file-description {
+            color: #6c757d;
+            font-size: 0.9em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .file-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .file-type {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        .stats-box {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            border: 2px solid #2196f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .category-section {
+            margin: 30px 0;
+        }
+
+        .category-title {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 ROS2 學習資源總覽</h1>
+
+        <div class="intro-box">
+            <h3>📚 歡迎來到 ROS2 學習資源中心</h3>
+            <p>這裡收集了各種學習資源，包括 Google Cloud Platform (GCP)、Ubuntu 系統操作、編輯器使用教學等。每個資源都經過精心整理，適合不同程度的學習者。</p>
+        </div>
+
+        <div class="stats-box">
+            <h3>📊 資源統計</h3>
+            <p><strong>總共 6 個學習資源</strong> | <strong>涵蓋 4 個主要領域</strong> | <strong>適合初學者到進階使用者</strong></p>
+        </div>
+
+        <!-- GCP 相關教學 -->
+        <div class="category-section">
+            <div class="category-title">☁️ Google Cloud Platform (GCP) 教學系列</div>
+            <div class="file-grid">
+                <a href="gcp新手教學.html" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">🌟</div>
+                        <div class="file-title">GCP 新手教學</div>
+                        <div class="file-description">
+                            完整的 GCP 入門指南，包含帳號註冊、核心服務介紹、操作範例等基礎內容
+                        </div>
+                        <span class="file-type">HTML</span>
+                    </div>
+                </a>
+
+                <a href="gcp新手教學02.html" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">🤖</div>
+                        <div class="file-title">GCP 新手教學 02</div>
+                        <div class="file-description">
+                            深入探討 Cloud Shell、SKU 管理、Gemini AI 等進階主題，包含實戰案例
+                        </div>
+                        <span class="file-type">HTML</span>
+                    </div>
+                </a>
+
+                <a href="gcp新手教學03.html" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">🚀</div>
+                        <div class="file-title">GCP 新手教學 03</div>
+                        <div class="file-description">
+                            從零開始建立 Gemini 1.5 Flash 互動應用的完整實戰教學
+                        </div>
+                        <span class="file-type">HTML</span>
+                    </div>
+                </a>
+
+                <a href="gcp_機器學習_相關api服務的說明.html" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">🧠</div>
+                        <div class="file-title">GCP 機器學習 API 服務說明</div>
+                        <div class="file-description">
+                            詳細介紹 Google Cloud AI/ML API 服務，包含功能說明、應用場景和使用範例
+                        </div>
+                        <span class="file-type">HTML</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 編輯器教學 -->
+        <div class="category-section">
+            <div class="category-title">✏️ 編輯器使用教學</div>
+            <div class="file-grid">
+                <a href="nano使用教學.html" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">📝</div>
+                        <div class="file-title">Nano 編輯器使用教學</div>
+                        <div class="file-description">
+                            Linux 系統下 nano 編輯器的完整使用指南，包含基本操作和進階功能
+                        </div>
+                        <span class="file-type">HTML</span>
+                    </div>
+                </a>
+
+                <a href="sublime使用教學.txt" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">💻</div>
+                        <div class="file-title">Sublime Text 使用教學</div>
+                        <div class="file-description">
+                            Sublime Text 編輯器的詳細使用教學，涵蓋安裝、設定和實用技巧
+                        </div>
+                        <span class="file-type">TXT</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 系統設定教學 -->
+        <div class="category-section">
+            <div class="category-title">🔧 系統設定與網路教學</div>
+            <div class="file-grid">
+                <a href="wifi-hotspot-setup.md" class="file-link">
+                    <div class="file-card">
+                        <div class="file-icon">📶</div>
+                        <div class="file-title">WiFi 熱點設定教學</div>
+                        <div class="file-description">
+                            Ubuntu 22.04 LTS 系統下設定 WiFi 熱點與 SSH 連線的完整步驟說明
+                        </div>
+                        <span class="file-type">Markdown</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 學習路徑建議 -->
+        <h2>🎯 建議學習路徑</h2>
+        <div class="intro-box">
+            <h4>📋 初學者路徑：</h4>
+            <ol>
+                <li><strong>GCP 新手教學</strong> → 了解雲端服務基礎概念</li>
+                <li><strong>Nano 編輯器教學</strong> → 學習基本文字編輯技能</li>
+                <li><strong>WiFi 熱點設定</strong> → 掌握網路設定技巧</li>
+                <li><strong>GCP 新手教學 02</strong> → 深入學習雲端進階功能</li>
+            </ol>
+
+            <h4>🚀 進階開發者路徑：</h4>
+            <ol>
+                <li><strong>GCP 機器學習 API 服務</strong> → 了解 AI/ML 服務概覽</li>
+                <li><strong>GCP 新手教學 03</strong> → 實戰 Gemini AI 應用開發</li>
+                <li><strong>Sublime Text 教學</strong> → 提升開發效率</li>
+            </ol>
+        </div>
+
+        <!-- 技術支援 -->
+        <h2>🛠️ 技術支援與說明</h2>
+        <div class="intro-box">
+            <h4>💡 使用提示：</h4>
+            <ul>
+                <li><strong>HTML 檔案</strong>：可直接在瀏覽器中開啟，支援互動式學習</li>
+                <li><strong>TXT 檔案</strong>：純文字格式，適合快速瀏覽和列印</li>
+                <li><strong>Markdown 檔案</strong>：建議使用支援 Markdown 的編輯器或瀏覽器外掛</li>
+            </ul>
+
+            <h4>🎯 學習建議：</h4>
+            <ul>
+                <li>建議按照學習路徑循序漸進</li>
+                <li>實際操作比單純閱讀更有效</li>
+                <li>遇到問題時可參考多個相關教學</li>
+                <li>建議搭配官方文件一起學習</li>
+            </ul>
+        </div>
+
+        <div class="last-updated">
+            <p>📅 最後更新：2025年7月9日 | 🔄 持續更新中...</p>
+            <p>💝 感謝您的學習，希望這些資源對您有幫助！</p>
+        </div>
+    </div>
+</body>
+
+</html>

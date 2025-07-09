@@ -1,5 +1,7 @@
 # Sublime Text 編輯器使用教學
 
+🏠 回到首頁：打開 default.html 檔案即可返回學習資源總覽
+
 ## 目錄
 1. [安裝 Sublime Text](#安裝-sublime-text)
 2. [基本操作](#基本操作)

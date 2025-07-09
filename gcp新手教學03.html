@@ -107,11 +107,32 @@
             margin: 10px 0;
             border-radius: 5px;
         }
+
+        .home-button {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+            color: white;
+            text-decoration: none;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <a href="default.html" class="home-button">🏠 回到首頁</a>
         <h1>🚀 Google Cloud Platform (GCP) 新手教學_03</h1>
         <h2 style="text-align: center; color: #4285f4;">從零開始建立 Gemini 1.5 Flash 互動應用</h2>
 
@@ -137,7 +158,7 @@
         <!-- 第一部分：環境準備 -->
         <div class="outline-item">
             <h3><span class="step-counter">1</span>🛠️ 第一部分：環境準備與專案設定</h3>
-            
+
             <h4>1.1 建立 GCP 專案</h4>
             <ul>
                 <li>建立新的 GCP 專案</li>
@@ -172,7 +193,7 @@
         <!-- 第二部分：Gemini API 設定 -->
         <div class="outline-item">
             <h3><span class="step-counter">2</span>🤖 第二部分：Gemini 1.5 Flash API 設定與測試</h3>
-            
+
             <h4>2.1 了解 Gemini API</h4>
             <ul>
                 <li>Gemini 1.5 Flash 模型特性</li>
@@ -206,7 +227,7 @@
         <!-- 第三部分：後端開發 -->
         <div class="outline-item">
             <h3><span class="step-counter">3</span>⚙️ 第三部分：後端 API 開發</h3>
-            
+
             <h4>3.1 設計 API 架構</h4>
             <ul>
                 <li>RESTful API 設計原則</li>
@@ -242,7 +263,7 @@
         <!-- 第四部分：前端開發 -->
         <div class="outline-item">
             <h3><span class="step-counter">4</span>💻 第四部分：前端介面開發</h3>
-            
+
             <h4>4.1 HTML 結構設計</h4>
             <ul>
                 <li>建立基本 HTML 框架</li>
@@ -278,7 +299,7 @@
         <!-- 第五部分：應用部署 -->
         <div class="outline-item">
             <h3><span class="step-counter">5</span>🚀 第五部分：應用程式部署與測試</h3>
-            
+
             <h4>5.1 使用 App Engine 部署</h4>
             <ul>
                 <li>準備 app.yaml 設定檔</li>
@@ -315,7 +336,7 @@
         <!-- 第六部分：進階應用 -->
         <div class="outline-item">
             <h3><span class="step-counter">6</span>🎯 第六部分：進階功能與實戰應用</h3>
-            
+
             <h4>6.1 多模態功能整合</h4>
             <ul>
                 <li>文字加圖片輸入</li>
@@ -351,7 +372,7 @@
         <!-- 附錄資源 -->
         <div class="outline-item">
             <h3><span class="step-counter">7</span>📚 附錄：資源與故障排除</h3>
-            
+
             <h4>7.1 完整程式碼範例</h4>
             <ul>
                 <li>後端完整程式碼</li>
