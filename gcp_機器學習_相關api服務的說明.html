@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Google API 服務總覽</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h2,
+        h3 {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Google API 服務總覽</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>API 名稱</th>
+                <th>提供者</th>
+                <th>內容說明</th>
+                <th>主要功能</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gemini API</td>
+                <td>Google</td>
+                <td>使用 Gemini 模型進行開發的 API</td>
+                <td>讓開發者能夠利用 Google DeepMind 的最新 AI 模型進行應用開發</td>
+            </tr>
+            <tr>
+                <td>Cloud Vision API</td>
+                <td>Google Enterprise API</td>
+                <td>圖像內容分析 API</td>
+                <td>支援圖片標籤、物件識別、OCR 等功能</td>
+            </tr>
+            <tr>
+                <td>Dialogflow API</td>
+                <td>Google Enterprise API</td>
+                <td>對話介面構建工具</td>
+                <td>用於開發聊天機器人、語音助手等對話式介面</td>
+            </tr>
+            <tr>
+                <td>Document AI Warehouse</td>
+                <td>Google</td>
+                <td>文件管理與分析平台</td>
+                <td>用於儲存、管理和分析企業文檔，提升處理效率</td>
+            </tr>
+            <tr>
+                <td>Gemini Cloud Assist</td>
+                <td>Google</td>
+                <td>雲端管理的 AI 協作工具</td>
+                <td>提供實時洞察與優化應用程式生命週期管理</td>
+            </tr>
+            <tr>
+                <td>Sensitive Data Protection (DLP)</td>
+                <td>Google Enterprise API</td>
+                <td>敏感資料保護服務</td>
+                <td>幫助發現、分類並保護敏感數據，防止資料外洩</td>
+            </tr>
+
+            <tr>
+                <td>AI Platform Training & Prediction API</td>
+                <td>Google Enterprise API</td>
+                <td>機器學習模型訓練與預測 API</td>
+                <td>用於建立和使用機器學習模型</td>
+            </tr>
+            <tr>
+                <td>Cloud AutoML API</td>
+                <td>Google Enterprise API</td>
+                <td>自動化機器學習模型訓練</td>
+                <td>讓用戶以最小努力訓練高品質自定義 ML 模型</td>
+            </tr>
+            <tr>
+                <td>Cloud Natural Language API</td>
+                <td>Google Enterprise API</td>
+                <td>自然語言理解技術</td>
+                <td>支援情感分析、實體識別等自然語言處理功能</td>
+            </tr>
+            <tr>
+                <td>Cloud Optimization API</td>
+                <td>Google</td>
+                <td>操作優化問題解決方案</td>
+                <td>在大規模場景中快速解決運營優化問題</td>
+            </tr>
+
+            <tr>
+                <td>Gemini for Google Cloud</td>
+                <td>Google</td>
+                <td>Google Cloud 上的 AI 協作夥伴</td>
+                <td>協助提高軟體交付速度，優化開發流程</td>
+            </tr>
+            <tr>
+                <td>Cloud Speech-to-Text API</td>
+                <td>Google Enterprise API</td>
+                <td>語音轉文字 API</td>
+                <td>實現語音辨識功能</td>
+            </tr>
+            <tr>
+                <td>Cloud Translation API</td>
+                <td>Google Enterprise API</td>
+                <td>文本翻譯整合工具</td>
+                <td>讓網站或應用程式輕鬆整合多語言翻譯</td>
+            </tr>
+            <tr>
+                <td>Cloud Video Intelligence API</td>
+                <td>Google Enterprise API</td>
+                <td>影片智能分析 API</td>
+                <td>偵測影片中的物件、明確內容及場景變化</td>
+            </tr>
+
+            <tr>
+                <td>Google Maps for Fleet Routing</td>
+                <td>Google</td>
+                <td>Fleet Routing 插件</td>
+                <td>啟用 Distance Matrix API 支援雲端車隊路線規劃</td>
+            </tr>
+            <tr>
+                <td>Vertex AI API</td>
+                <td>Google Enterprise API</td>
+                <td>統一的機器學習平台</td>
+                <td>以最少的 ML 專業知識訓練高品質自定義模型</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>&nbsp;</p>
+
+    <h3>Cloud Speech-to-Text API 收費說明</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>功能</th>
+                <th>收費標準</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>標準模式</td>
+                <td>$0.006 每 15 秒 (約新台幣 0.18 元)</td>
+                <td>適用於一般語音轉文字需求</td>
+            </tr>
+            <tr>
+                <td>視頻模式</td>
+                <td>$0.012 每 15 秒 (約新台幣 0.36 元)</td>
+                <td>針對視頻內容進行語音轉文字</td>
+            </tr>
+            <tr>
+                <td>電話模式</td>
+                <td>$0.015 每 15 秒 (約新台幣 0.45 元)</td>
+                <td>專為電話錄音設計的語音轉文字</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
