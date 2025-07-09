@@ -324,9 +324,11 @@
             <h2>💰 SKU 和 SKU 分組詳細說明</h2>
 
             <h3>📝 什麼是 SKU？</h3>
-            <div style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
                 <strong>📖 SKU 定義：</strong>
-                <p><strong>SKU (Stock Keeping Unit)</strong> 在 GCP 中是指<strong>計費單位</strong>，代表特定服務的可計費項目。每個 SKU 都有唯一的識別碼和計費規則。</p>
+                <p><strong>SKU (Stock Keeping Unit)</strong> 在 GCP 中是指<strong>計費單位</strong>，代表特定服務的可計費項目。每個 SKU
+                    都有唯一的識別碼和計費規則。</p>
 
                 <strong>🎯 SKU 的主要特徵：</strong>
                 <ul>
@@ -352,7 +354,8 @@
             </div>
 
             <h3>📊 什麼是 SKU 分組？</h3>
-            <div style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
                 <strong>📖 SKU 分組定義：</strong>
                 <p><strong>SKU 分組 (SKU Groups)</strong> 是將相關的 SKU 組織在一起的邏輯分類，用於簡化計費管理和成本分析。</p>
 
@@ -378,7 +381,8 @@
             </div>
 
             <h3>🔍 SKU 的詳細結構</h3>
-            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
                 <thead>
                     <tr style="background: linear-gradient(135deg, #4285f4, #1976d2); color: white;">
                         <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">SKU 屬性</th>
@@ -400,7 +404,8 @@
                     <tr style="background-color: #f8f9fa;">
                         <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Description</strong></td>
                         <td style="border: 1px solid #e0e0e0; padding: 15px;">詳細描述</td>
-                        <td style="border: 1px solid #e0e0e0; padding: 15px;">N1 Predefined Instance Core running in Americas</td>
+                        <td style="border: 1px solid #e0e0e0; padding: 15px;">N1 Predefined Instance Core running in
+                            Americas</td>
                     </tr>
                     <tr>
                         <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Category</strong></td>
@@ -439,7 +444,8 @@
                 gcloud billing skus list --filter="serviceRegions:us-central1"<br><br>
 
                 # 查看 SKU 的定價資訊<br>
-                gcloud billing skus list --filter="name:*standard*" --format="table(name,description,category,serviceRegions[0]:label=REGION)"
+                gcloud billing skus list --filter="name:*standard*"
+                --format="table(name,description,category,serviceRegions[0]:label=REGION)"
             </div>
 
             <h4>💰 實用的 SKU 查詢範例：</h4>
@@ -482,7 +488,488 @@
                 <li><strong>自動化管理</strong>：透過 API 自動監控和管理計費</li>
             </ul>
         </div>
-    </div>
-</body>
 
-</html>
+        <!-- Gemini Cloud Assist in Billing 詳細說明 -->
+        <div class="info-box">
+            <h2>🤖 Gemini Cloud Assist in Billing 詳細說明</h2>
+
+            <h3>📝 什麼是 Gemini Cloud Assist in Billing？</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+                <strong>📖 定義：</strong>
+                <p><strong>Gemini Cloud Assist in Billing</strong> 是 Google Cloud 的 AI 驅動計費助手，利用 Gemini AI
+                    技術幫助用戶更好地理解和管理雲端費用。</p>
+
+                <strong>🎯 主要功能：</strong>
+                <ul>
+                    <li><strong>費用分析</strong>：自動分析您的計費模式和支出趨勢</li>
+                    <li><strong>成本優化建議</strong>：提供個人化的成本節省建議</li>
+                    <li><strong>異常費用檢測</strong>：識別異常的費用增長或使用模式</li>
+                    <li><strong>預算建議</strong>：基於歷史數據建議合理的預算設定</li>
+                    <li><strong>自然語言查詢</strong>：可用自然語言詢問計費相關問題</li>
+                    <li><strong>智能報告</strong>：生成易懂的費用報告和解釋</li>
+                </ul>
+
+                <strong>💡 應用場景：</strong>
+                <div class="command-box">
+                    # 範例查詢（自然語言）<br>
+                    "為什麼我這個月的 Compute Engine 費用比上個月高？"<br>
+                    "我可以如何降低 Cloud Storage 的成本？"<br>
+                    "預測我下個月的總費用會是多少？"<br>
+                    "哪個專案的費用增長最快？"
+                </div>
+            </div>
+
+            <h3>💰 Gemini API 收費詳情</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #f44336;">
+                <strong>⚠️ 重要：啟用 Gemini API 會產生費用！</strong>
+
+                <h4>📊 Gemini API 定價結構（2025年最新）</h4>
+                <table
+                    style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #f44336, #d32f2f); color: white;">
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">Gemini 模型</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">輸入價格</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">輸出價格</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">計費單位</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Gemini 1.5 Flash</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">$0.075 USD</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">$0.30 USD</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">每百萬 tokens</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Gemini 1.5 Pro</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">$3.50 USD</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">$10.50 USD</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">每百萬 tokens</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Gemini 1.0 Pro</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">$0.50 USD</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">$1.50 USD</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">每百萬 tokens</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <strong>📝 重要說明：</strong>
+                <ul>
+                    <li><strong>按使用量計費</strong>：只有實際使用 Gemini API 時才會產生費用</li>
+                    <li><strong>Token 計算</strong>：輸入和輸出的文字都會轉換為 tokens 計算</li>
+                    <li><strong>最低計費</strong>：每次 API 呼叫都有最低 token 數計費</li>
+                    <li><strong>區域定價</strong>：不同區域可能有輕微的價格差異</li>
+                </ul>
+            </div>
+
+            <h3>🎁 免費額度與限制</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4caf50;">
+                <strong>💚 Gemini API 免費方案：</strong>
+                <ul>
+                    <li><strong>Gemini 1.5 Flash</strong>：每天 1,500 次請求免費</li>
+                    <li><strong>Gemini 1.5 Pro</strong>：每天 50 次請求免費</li>
+                    <li><strong>速率限制</strong>：每分鐘 15 次請求</li>
+                    <li><strong>Token 限制</strong>：每次請求最多 32,000 tokens</li>
+                </ul>
+
+                <strong>⚠️ 超出免費額度後：</strong>
+                <ul>
+                    <li>自動轉為付費使用</li>
+                    <li>按上述定價表計費</li>
+                    <li>建議設定預算提醒</li>
+                </ul>
+            </div>
+
+            <h3>💡 Cloud Assist in Billing 的費用控制</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #ff9800;">
+                <strong>🛡️ 如何控制 Gemini 使用費用：</strong>
+
+                <h4>📋 設定預算和提醒：</h4>
+                <div class="command-box">
+                    # 設定 Gemini API 的預算提醒<br>
+                    gcloud billing budgets create \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;--billing-account=BILLING_ACCOUNT_ID \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;--display-name="Gemini API Budget" \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;--budget-amount=50USD \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;--threshold-rule=percent=80 \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;--threshold-rule=percent=100<br><br>
+
+                    # 查看 Gemini API 使用量<br>
+                    gcloud logging read \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"resource.type=gce_instance AND
+                    protoPayload.serviceName=aiplatform.googleapis.com"
+                </div>
+
+                <h4>🔧 API 使用最佳實務：</h4>
+                <ul>
+                    <li><strong>啟用 API 配額限制</strong>：設定每日 API 呼叫上限</li>
+                    <li><strong>監控使用量</strong>：定期檢查 API 使用統計</li>
+                    <li><strong>優化請求</strong>：避免不必要的重複查詢</li>
+                    <li><strong>使用快取</strong>：對相同查詢結果進行快取</li>
+                    <li><strong>選擇適當模型</strong>：根據需求選擇 Flash 或 Pro 版本</li>
+                </ul>
+            </div>
+
+            <h3>📊 實際費用範例</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #2196f3;">
+                <strong>💰 費用計算範例</strong>
+
+                <h4>🔍 情境 1：輕度使用（小型團隊）</h4>
+                <div class="command-box">
+                    # 每月使用量估算<br>
+                    - 每天 10 次計費查詢<br>
+                    - 每次查詢約 500 input tokens + 200 output tokens<br>
+                    - 使用 Gemini 1.5 Flash<br><br>
+
+                    # 月費用計算<br>
+                    Input: 10 × 30 × 500 = 150,000 tokens/月<br>
+                    Output: 10 × 30 × 200 = 60,000 tokens/月<br><br>
+
+                    Input 費用: 0.15M × $0.075 = $0.01125<br>
+                    Output 費用: 0.06M × $0.30 = $0.018<br>
+                    月總費用: $0.03 USD（約 NT$1）
+                </div>
+
+                <h4>📈 情境 2：中度使用（中型企業）</h4>
+                <div class="command-box">
+                    # 每月使用量估算<br>
+                    - 每天 100 次計費查詢<br>
+                    - 每次查詢約 1000 input tokens + 500 output tokens<br>
+                    - 使用 Gemini 1.5 Pro（更精確的分析）<br><br>
+
+                    # 月費用計算<br>
+                    Input: 100 × 30 × 1000 = 3,000,000 tokens/月<br>
+                    Output: 100 × 30 × 500 = 1,500,000 tokens/月<br><br>
+
+                    Input 費用: 3M × $3.50 = $10.50<br>
+                    Output 費用: 1.5M × $10.50 = $15.75<br>
+                    月總費用: $26.25 USD（約 NT$840）
+                </div>
+            </div>
+
+            <h3>🎯 啟用建議與風險評估</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #9c27b0;">
+                <strong>✅ 建議啟用的情況：</strong>
+                <ul>
+                    <li><strong>複雜計費環境</strong>：有多個專案和服務需要分析</li>
+                    <li><strong>成本優化需求</strong>：需要 AI 協助找出節省成本的機會</li>
+                    <li><strong>預算管理</strong>：需要更精確的預算預測和建議</li>
+                    <li><strong>非技術團隊</strong>：需要以自然語言查詢計費資訊</li>
+                </ul>
+
+                <strong>❌ 不建議啟用的情況：</strong>
+                <ul>
+                    <li><strong>預算極度受限</strong>：無法承擔額外的 AI API 費用</li>
+                    <li><strong>簡單使用情境</strong>：只有少數服務且費用透明</li>
+                    <li><strong>已有完善工具</strong>：現有的監控和分析工具已足夠</li>
+                    <li><strong>資料敏感性</strong>：不希望計費資料經過 AI 分析</li>
+                </ul>
+
+                <strong>⚖️ 投資回報評估：</strong>
+                <div class="command-box">
+                    # 如果 Gemini 建議能節省 5% 的雲端費用<br>
+                    # 而您的月雲端費用是 $1000 USD<br>
+                    # 潛在節省: $1000 × 5% = $50/月<br>
+                    # Gemini 費用: 約 $10-30/月（視使用量）<br>
+                    # 淨節省: $20-40/月<br>
+                    # ROI: 67%-300%
+                </div>
+            </div>
+        </div>
+
+        <!-- Gemini、Vertex AI Studio、Kubernetes 基礎概念說明 -->
+        <div class="info-box">
+            <h2>🧠 基礎概念說明</h2>
+
+            <!-- Gemini 是什麼 -->
+            <h3>🤖 Gemini 是什麼？</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4285f4;">
+                <strong>📖 Gemini 定義：</strong>
+                <p><strong>Gemini</strong> 是 Google 開發的最先進多模態大型語言模型（Large Language
+                    Model），能夠理解和處理文字、圖像、音頻、視頻和程式碼等多種類型的資料。</p>
+
+                <strong>🎯 Gemini 的主要特色：</strong>
+                <ul>
+                    <li><strong>多模態能力</strong>：可同時處理文字、圖像、音頻等多種格式</li>
+                    <li><strong>先進推理</strong>：具備複雜的邏輯推理和問題解決能力</li>
+                    <li><strong>程式碼理解</strong>：能夠理解、生成和除錯程式碼</li>
+                    <li><strong>多語言支援</strong>：支援 100+ 種語言</li>
+                    <li><strong>長上下文</strong>：可處理極長的對話和文檔</li>
+                    <li><strong>即時互動</strong>：支援即時對話和協作</li>
+                </ul>
+
+                <strong>🔢 Gemini 模型版本：</strong>
+                <table
+                    style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #4285f4, #1976d2); color: white;">
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">模型版本</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">特點</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">適用場景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Gemini Ultra</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">最強大的模型，具備最高的性能</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">複雜推理、研究、專業應用</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Gemini Pro</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">平衡性能與效率的通用模型</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">一般應用、商業用途、開發</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Gemini Flash</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">輕量快速，專為高頻使用優化</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">即時互動、聊天機器人、API 呼叫</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <strong>💡 實際應用範例：</strong>
+                <div class="command-box">
+                    # 程式碼生成與除錯<br>
+                    "請幫我寫一個 Python 函數來計算費波那契數列"<br><br>
+
+                    # 多模態分析<br>
+                    "分析這張圖片中的資料趨勢，並提供見解"<br><br>
+
+                    # 文檔總結<br>
+                    "總結這份 100 頁的技術文檔的重點"<br><br>
+
+                    # 創意寫作<br>
+                    "根據這個主題寫一篇部落格文章"
+                </div>
+            </div>
+
+            <!-- Vertex AI Studio 是什麼 -->
+            <h3>🏗️ Vertex AI Studio 是什麼？</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #ff9800;">
+                <strong>📖 Vertex AI Studio 定義：</strong>
+                <p><strong>Vertex AI Studio</strong> 是 Google Cloud 提供的統一 AI 開發平台，讓開發者和資料科學家能夠輕鬆建立、訓練、部署和管理機器學習模型。</p>
+
+                <strong>🎯 主要功能模組：</strong>
+                <ul>
+                    <li><strong>模型花園（Model Garden）</strong>：預訓練模型庫，包含 Gemini、PaLM 等</li>
+                    <li><strong>生成式 AI 工作室</strong>：測試和調整生成式 AI 模型</li>
+                    <li><strong>語言模型調優</strong>：自訂和微調大型語言模型</li>
+                    <li><strong>AutoML</strong>：無程式碼機器學習模型訓練</li>
+                    <li><strong>自訂訓練</strong>：使用自己的資料訓練模型</li>
+                    <li><strong>模型部署</strong>：一鍵部署到生產環境</li>
+                </ul>
+
+                <strong>🛠️ 核心工具與服務：</strong>
+                <table
+                    style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #ff9800, #f57c00); color: white;">
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">工具/服務</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">功能</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">適用對象</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Prompt Design</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">設計和測試提示詞</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">AI 應用開發者</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Model Tuning</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">微調預訓練模型</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">機器學習工程師</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Notebooks</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">Jupyter 筆記本環境</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">資料科學家</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Pipelines</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">ML 工作流程自動化</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">MLOps 工程師</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Endpoints</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">模型服務端點</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">應用程式開發者</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <strong>🚀 使用流程：</strong>
+                <div class="command-box">
+                    # 1. 進入 Vertex AI Studio<br>
+                    # 在 GCP Console 中搜尋 "Vertex AI"<br>
+                    # 或前往：https://console.cloud.google.com/vertex-ai<br><br>
+
+                    # 2. 選擇適合的工具<br>
+                    # - Model Garden: 選擇預訓練模型<br>
+                    # - Prompt Design: 測試 Gemini 模型<br>
+                    # - AutoML: 訓練自訂模型<br><br>
+
+                    # 3. 使用 gcloud 命令管理<br>
+                    gcloud ai models list<br>
+                    gcloud ai endpoints create<br>
+                    gcloud ai custom-jobs create
+                </div>
+
+                <strong>💰 定價模式：</strong>
+                <ul>
+                    <li><strong>按使用量計費</strong>：根據 API 呼叫次數和運算時間</li>
+                    <li><strong>訓練費用</strong>：依據訓練時間和資源使用量</li>
+                    <li><strong>部署費用</strong>：按模型端點的運行時間計費</li>
+                    <li><strong>儲存費用</strong>：模型和資料的儲存成本</li>
+                </ul>
+            </div>
+
+            <!-- Kubernetes 是什麼 -->
+            <h3>⚙️ Kubernetes 是什麼？</h3>
+            <div
+                style="background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4caf50;">
+                <strong>📖 Kubernetes 定義：</strong>
+                <p><strong>Kubernetes（常簡稱為 K8s）</strong> 是一個開源的容器編排平台，用於自動化部署、擴展和管理容器化應用程式。最初由 Google 開發，現在由 Cloud
+                    Native Computing Foundation (CNCF) 維護。</p>
+
+                <strong>🎯 核心概念：</strong>
+                <ul>
+                    <li><strong>容器編排</strong>：管理多個容器的部署和運行</li>
+                    <li><strong>自動擴展</strong>：根據負載自動調整應用程式規模</li>
+                    <li><strong>自我修復</strong>：自動重啟失敗的容器和節點</li>
+                    <li><strong>負載平衡</strong>：自動分配流量到健康的容器</li>
+                    <li><strong>滾動更新</strong>：無停機時間的應用程式更新</li>
+                    <li><strong>服務發現</strong>：自動發現和連接服務</li>
+                </ul>
+
+                <strong>🏗️ 主要組件：</strong>
+                <table
+                    style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #4caf50, #388e3c); color: white;">
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">組件</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">功能</th>
+                            <th style="border: 1px solid #e0e0e0; padding: 15px; text-align: left;">類比</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Pod</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">最小部署單位，包含一個或多個容器</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">公寓套房</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Service</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">定義一組 Pod 的網路存取方式</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">大樓門牌號碼</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Deployment</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">管理 Pod 的部署和更新</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">建築師藍圖</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>ConfigMap</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">儲存應用程式配置資料</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">設定檔案櫃</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Secret</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">儲存敏感資料（密碼、證書等）</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">保險箱</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;"><strong>Ingress</strong></td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">管理外部存取到服務的 HTTP/HTTPS 路由</td>
+                            <td style="border: 1px solid #e0e0e0; padding: 15px;">大樓接待處</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <strong>☁️ Google Kubernetes Engine (GKE)：</strong>
+                <ul>
+                    <li><strong>託管服務</strong>：Google Cloud 的完全託管 Kubernetes 服務</li>
+                    <li><strong>自動管理</strong>：自動處理控制平面的維護和升級</li>
+                    <li><strong>整合服務</strong>：與其他 GCP 服務深度整合</li>
+                    <li><strong>企業級安全</strong>：內建安全功能和最佳實務</li>
+                    <li><strong>自動擴展</strong>：節點和 Pod 的自動擴展功能</li>
+                </ul>
+
+                <strong>🔧 常用 kubectl 命令：</strong>
+                <div class="command-box">
+                    # 查看叢集資訊<br>
+                    kubectl cluster-info<br><br>
+
+                    # 列出所有 Pod<br>
+                    kubectl get pods<br><br>
+
+                    # 列出所有服務<br>
+                    kubectl get services<br><br>
+
+                    # 部署應用程式<br>
+                    kubectl apply -f deployment.yaml<br><br>
+
+                    # 查看 Pod 日誌<br>
+                    kubectl logs pod-name<br><br>
+
+                    # 進入 Pod 內部<br>
+                    kubectl exec -it pod-name -- /bin/bash<br><br>
+
+                    # 刪除資源<br>
+                    kubectl delete pod pod-name
+                </div>
+
+                <strong>💡 實際應用場景：</strong>
+                <ul>
+                    <li><strong>微服務架構</strong>：管理複雜的微服務應用程式</li>
+                    <li><strong>DevOps CI/CD</strong>：自動化部署和更新流程</li>
+                    <li><strong>多雲部署</strong>：在不同雲端平台部署一致的應用</li>
+                    <li><strong>AI/ML 工作負載</strong>：部署和擴展機器學習模型</li>
+                    <li><strong>高可用性系統</strong>：建立容錯和自我修復的系統</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 三者關聯性說明 -->
+        <div class="tip-box">
+            <h3>🔗 Gemini、Vertex AI Studio、Kubernetes 的關聯性</h3>
+
+            <h4>🎯 在 AI 開發流程中的角色：</h4>
+            <ul>
+                <li><strong>Gemini</strong>：AI 的"大腦" - 提供智能能力</li>
+                <li><strong>Vertex AI Studio</strong>：AI 的"工作台" - 開發和管理 AI 模型</li>
+                <li><strong>Kubernetes</strong>：AI 的"基礎設施" - 部署和運行 AI 應用</li>
+            </ul>
+
+            <h4>💼 實際整合案例：</h4>
+            <div class="command-box">
+                # 典型的 AI 應用部署流程<br>
+                1. 在 Vertex AI Studio 中測試和調優 Gemini 模型<br>
+                2. 將模型包裝成 API 服務<br>
+                3. 使用 Docker 容器化 AI 應用<br>
+                4. 部署到 GKE（Kubernetes）叢集<br>
+                5. 透過 Kubernetes 管理擴展和更新
+            </div>
+
+            <h4>🚀 為什麼要一起使用：</h4>
+            <ul>
+                <li><strong>端到端解決方案</strong>：從模型開發到生產部署的完整流程</li>
+                <li><strong>可擴展性</strong>：Kubernetes 確保 AI 應用能夠處理大量請求</li>
+                <li><strong>成本效益</strong>：根據需求自動調整資源使用</li>
+                <li><strong>可靠性</strong>：容器化和編排提高系統穩定性</li>
+                <li><strong>維護性</strong>：統一的管理和監控平台</li>
+            </ul>
+        </div>
+
+        <!-- ...existing code...

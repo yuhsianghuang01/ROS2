@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud Platform (GCP) 新手教學 - Gemini 1.5 Flash 實戰應用</title>
+    <style>
+        /* 參考樣式，與您提供的樣式一致 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            border-bottom: 3px solid #4285f4;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2,
+        h3 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+
+        .info-box,
+        .tip-box,
+        .warning-box,
+        .success-box {
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            border: 2px solid #2196f3;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff8e1, #fffde7);
+            border: 2px solid #ffc107;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ffebee, #fce4ec);
+            border: 2px solid #f44336;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border: 2px solid #4caf50;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .command-box {
+            background: linear-gradient(135deg, #263238, #37474f);
+            color: #e0f2f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #4caf50;
+        }
+
+        .step-counter {
+            background: #4285f4;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .outline-item {
+            background: #f8f9fa;
+            border-left: 4px solid #4285f4;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Google Cloud Platform (GCP) 新手教學_03</h1>
+        <h2 style="text-align: center; color: #4285f4;">從零開始建立 Gemini 1.5 Flash 互動應用</h2>
+
+        <!-- 學習目標 -->
+        <div class="info-box">
+            <h3>🎯 本教學的學習目標</h3>
+            <p>透過本教學，您將學會從零開始建立一個完整的應用程式，能夠與 Google 的 Gemini 1.5 Flash AI 模型進行互動。</p>
+            <ul>
+                <li><strong>環境準備</strong>：設定 GCP 專案和相關權限</li>
+                <li><strong>API 設定</strong>：啟用並設定 Gemini API</li>
+                <li><strong>程式開發</strong>：建立前端和後端應用程式</li>
+                <li><strong>部署測試</strong>：將應用程式部署到雲端並測試</li>
+                <li><strong>實戰應用</strong>：了解如何在實際專案中應用</li>
+            </ul>
+        </div>
+
+        <!-- 教學大綱 -->
+        <div class="tip-box">
+            <h3>📋 完整教學大綱</h3>
+            <p>以下是本教學的完整結構，每個章節都會有詳細的步驟說明：</p>
+        </div>
+
+        <!-- 第一部分：環境準備 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">1</span>🛠️ 第一部分：環境準備與專案設定</h3>
+            
+            <h4>1.1 建立 GCP 專案</h4>
+            <ul>
+                <li>建立新的 GCP 專案</li>
+                <li>設定專案 ID 和名稱</li>
+                <li>啟用計費帳戶</li>
+            </ul>
+
+            <h4>1.2 啟用必要的 API</h4>
+            <ul>
+                <li>啟用 Vertex AI API</li>
+                <li>啟用 Cloud Functions API</li>
+                <li>啟用 Cloud Storage API</li>
+                <li>啟用 App Engine API</li>
+            </ul>
+
+            <h4>1.3 設定權限和服務帳戶</h4>
+            <ul>
+                <li>建立服務帳戶</li>
+                <li>設定 IAM 權限</li>
+                <li>下載服務帳戶金鑰</li>
+            </ul>
+
+            <h4>1.4 安裝開發工具</h4>
+            <ul>
+                <li>安裝 Google Cloud SDK</li>
+                <li>設定 gcloud CLI</li>
+                <li>安裝 Python 和相關套件</li>
+                <li>設定開發環境</li>
+            </ul>
+        </div>
+
+        <!-- 第二部分：Gemini API 設定 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">2</span>🤖 第二部分：Gemini 1.5 Flash API 設定與測試</h3>
+            
+            <h4>2.1 了解 Gemini API</h4>
+            <ul>
+                <li>Gemini 1.5 Flash 模型特性</li>
+                <li>API 端點和請求格式</li>
+                <li>計費模式和配額限制</li>
+            </ul>
+
+            <h4>2.2 API 金鑰管理</h4>
+            <ul>
+                <li>生成 API 金鑰</li>
+                <li>設定環境變數</li>
+                <li>安全性最佳實務</li>
+            </ul>
+
+            <h4>2.3 第一次 API 呼叫</h4>
+            <ul>
+                <li>使用 Cloud Shell 測試</li>
+                <li>curl 命令範例</li>
+                <li>Python 程式碼測試</li>
+                <li>錯誤處理和除錯</li>
+            </ul>
+
+            <h4>2.4 進階 API 設定</h4>
+            <ul>
+                <li>設定請求參數</li>
+                <li>調整模型行為</li>
+                <li>批次處理設定</li>
+            </ul>
+        </div>
+
+        <!-- 第三部分：後端開發 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">3</span>⚙️ 第三部分：後端 API 開發</h3>
+            
+            <h4>3.1 設計 API 架構</h4>
+            <ul>
+                <li>RESTful API 設計原則</li>
+                <li>端點規劃</li>
+                <li>資料格式定義</li>
+            </ul>
+
+            <h4>3.2 使用 Flask 建立後端</h4>
+            <ul>
+                <li>建立 Flask 應用程式</li>
+                <li>設定路由和處理函數</li>
+                <li>整合 Gemini API</li>
+                <li>錯誤處理和日誌記錄</li>
+            </ul>
+
+            <h4>3.3 Cloud Functions 部署</h4>
+            <ul>
+                <li>準備部署檔案</li>
+                <li>requirements.txt 設定</li>
+                <li>使用 gcloud 部署</li>
+                <li>測試雲端函數</li>
+            </ul>
+
+            <h4>3.4 安全性和效能優化</h4>
+            <ul>
+                <li>CORS 設定</li>
+                <li>請求驗證</li>
+                <li>快取機制</li>
+                <li>限流設定</li>
+            </ul>
+        </div>
+
+        <!-- 第四部分：前端開發 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">4</span>💻 第四部分：前端介面開發</h3>
+            
+            <h4>4.1 HTML 結構設計</h4>
+            <ul>
+                <li>建立基本 HTML 框架</li>
+                <li>設計聊天介面</li>
+                <li>響應式設計考量</li>
+            </ul>
+
+            <h4>4.2 CSS 樣式設計</h4>
+            <ul>
+                <li>現代化 UI 設計</li>
+                <li>聊天氣泡樣式</li>
+                <li>動畫效果</li>
+                <li>行動裝置適配</li>
+            </ul>
+
+            <h4>4.3 JavaScript 互動功能</h4>
+            <ul>
+                <li>表單處理</li>
+                <li>AJAX 請求</li>
+                <li>即時訊息顯示</li>
+                <li>錯誤處理</li>
+            </ul>
+
+            <h4>4.4 進階功能實作</h4>
+            <ul>
+                <li>打字效果模擬</li>
+                <li>訊息歷史記錄</li>
+                <li>檔案上傳功能</li>
+                <li>匯出對話紀錄</li>
+            </ul>
+        </div>
+
+        <!-- 第五部分：應用部署 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">5</span>🚀 第五部分：應用程式部署與測試</h3>
+            
+            <h4>5.1 使用 App Engine 部署</h4>
+            <ul>
+                <li>準備 app.yaml 設定檔</li>
+                <li>部署前端應用</li>
+                <li>設定自訂網域</li>
+                <li>SSL 憑證設定</li>
+            </ul>
+
+            <h4>5.2 整合測試</h4>
+            <ul>
+                <li>功能測試</li>
+                <li>效能測試</li>
+                <li>跨瀏覽器測試</li>
+                <li>行動裝置測試</li>
+            </ul>
+
+            <h4>5.3 監控和維護</h4>
+            <ul>
+                <li>設定 Cloud Monitoring</li>
+                <li>日誌分析</li>
+                <li>錯誤追蹤</li>
+                <li>效能監控</li>
+            </ul>
+
+            <h4>5.4 CI/CD 設定</h4>
+            <ul>
+                <li>使用 Cloud Build</li>
+                <li>自動化部署</li>
+                <li>版本管理</li>
+                <li>回滾機制</li>
+            </ul>
+        </div>
+
+        <!-- 第六部分：進階應用 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">6</span>🎯 第六部分：進階功能與實戰應用</h3>
+            
+            <h4>6.1 多模態功能整合</h4>
+            <ul>
+                <li>文字加圖片輸入</li>
+                <li>檔案分析功能</li>
+                <li>語音轉文字整合</li>
+            </ul>
+
+            <h4>6.2 企業級功能</h4>
+            <ul>
+                <li>使用者認證系統</li>
+                <li>多租戶架構</li>
+                <li>資料庫整合</li>
+                <li>API 金鑰管理</li>
+            </ul>
+
+            <h4>6.3 成本優化</h4>
+            <ul>
+                <li>API 使用量監控</li>
+                <li>快取策略</li>
+                <li>請求最佳化</li>
+                <li>預算控制</li>
+            </ul>
+
+            <h4>6.4 擴展應用場景</h4>
+            <ul>
+                <li>客服聊天機器人</li>
+                <li>文檔分析工具</li>
+                <li>程式碼助手</li>
+                <li>內容生成器</li>
+            </ul>
+        </div>
+
+        <!-- 附錄資源 -->
+        <div class="outline-item">
+            <h3><span class="step-counter">7</span>📚 附錄：資源與故障排除</h3>
+            
+            <h4>7.1 完整程式碼範例</h4>
+            <ul>
+                <li>後端完整程式碼</li>
+                <li>前端完整程式碼</li>
+                <li>設定檔範例</li>
+                <li>部署腳本</li>
+            </ul>
+
+            <h4>7.2 常見問題與解決方案</h4>
+            <ul>
+                <li>API 呼叫錯誤</li>
+                <li>權限問題</li>
+                <li>部署失敗</li>
+                <li>效能問題</li>
+            </ul>
+
+            <h4>7.3 進階資源</h4>
+            <ul>
+                <li>官方文檔連結</li>
+                <li>社群資源</li>
+                <li>相關工具推薦</li>
+                <li>學習路徑建議</li>
+            </ul>
+        </div>
+
+        <!-- 預期學習成果 -->
+        <div class="success-box">
+            <h3>🏆 完成本教學後，您將能夠：</h3>
+            <ul>
+                <li>✅ <strong>獨立建立 Gemini AI 應用</strong>：從零開始建立完整的 AI 互動應用</li>
+                <li>✅ <strong>掌握 GCP 核心服務</strong>：熟練使用 Cloud Functions、App Engine 等服務</li>
+                <li>✅ <strong>理解 AI API 整合</strong>：知道如何安全高效地整合第三方 AI 服務</li>
+                <li>✅ <strong>全端開發能力</strong>：具備前端、後端、部署的完整開發流程</li>
+                <li>✅ <strong>生產環境部署</strong>：能夠將應用部署到正式環境並進行維護</li>
+                <li>✅ <strong>商業應用思維</strong>：了解如何將技術轉化為實際的商業解決方案</li>
+            </ul>
+        </div>
+
+        <!-- 前置知識要求 -->
+        <div class="warning-box">
+            <h3>⚠️ 建議的前置知識</h3>
+            <ul>
+                <li><strong>基礎程式設計</strong>：Python 或 JavaScript 基礎語法</li>
+                <li><strong>網頁開發</strong>：HTML、CSS、JavaScript 基本概念</li>
+                <li><strong>命令列操作</strong>：基本的終端機/命令提示字元操作</li>
+                <li><strong>雲端概念</strong>：對雲端服務有基本認識（建議先閱讀教學01和02）</li>
+            </ul>
+            <p><strong>💡 提示：</strong>如果您對某些概念不熟悉，我們會在相關章節提供額外的說明和連結。</p>
+        </div>
+
+        <!-- 預估學習時間 -->
+        <div class="info-box">
+            <h3>⏰ 預估學習時間</h3>
+            <ul>
+                <li><strong>快速實作版</strong>：2-3 小時（只跟著步驟操作）</li>
+                <li><strong>深度學習版</strong>：6-8 小時（理解每個步驟的原理）</li>
+                <li><strong>擴展實戰版</strong>：12-16 小時（包含進階功能和自訂修改）</li>
+            </ul>
+            <p><strong>建議：</strong>分階段學習，每次專注於一個部分，確保完全理解再進入下一階段。</p>
+        </div>
+
+        <!-- 開始前的準備 -->
+        <div class="tip-box">
+            <h3>🚀 開始前的準備清單</h3>
+            <h4>請確保您已經準備好以下項目：</h4>
+            <ul>
+                <li>☐ Google 帳號（用於存取 GCP）</li>
+                <li>☐ 信用卡或金融卡（用於 GCP 計費設定，有免費額度）</li>
+                <li>☐ 穩定的網路連線</li>
+                <li>☐ 現代化的網頁瀏覽器（Chrome、Firefox、Safari 等）</li>
+                <li>☐ 文字編輯器或 IDE（VS Code、Sublime Text 等）</li>
+                <li>☐ 約 2-3 小時的完整時間（建議不要中斷）</li>
+            </ul>
+            <p><strong>✨ 準備好了嗎？讓我們開始這趟 AI 應用開發之旅！</strong></p>
+        </div>
+
+        <!-- 下一步指引 -->
+        <div class="success-box">
+            <h3>📋 確認大綱後的下一步</h3>
+            <p>請仔細檢查以上大綱是否符合您的學習需求。如果您對大綱內容滿意，請告訴我：</p>
+            <ul>
+                <li>✅ <strong>「大綱確認無誤」</strong> - 我將開始詳細撰寫每個章節的內容</li>
+                <li>🔄 <strong>需要調整的部分</strong> - 請告訴我需要修改或新增的內容</li>
+                <li>❓ <strong>有疑問的地方</strong> - 我會進一步說明或調整</li>
+            </ul>
+            <p><strong>💡 提醒：</strong>詳細內容撰寫完成後，這將是一個非常完整的實戰教學，包含所有程式碼、截圖說明和逐步操作指引。</p>
+        </div>
+
+    </div>
+</body>
+
+</html>
