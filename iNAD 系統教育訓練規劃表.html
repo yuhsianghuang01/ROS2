@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <title>iNAD 系統教育訓練規劃表</title>
+  <style>
+    body {
+      font-family: "Microsoft JhengHei", sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #2c3e50;
+    }
+
+    ul,
+    ol {
+      margin-bottom: 1em;
+    }
+
+    code {
+      background-color: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #eaeaea;
+    }
+
+    .highlight {
+      background-color: #fff9c4;
+      padding: 10px;
+      border-left: 4px solid #fbc02d;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>iNAD 系統教育訓練規劃表</h1>
+
+  <hr>
+
+  <h2>✅ 一、背景說明</h2>
+  <p>本次委託 A公司 針對 iNAD 系統進行完整教育訓練，主要目的在於：</p>
+  <ul>
+    <li>提升內部人員對 iNAD 系統架構的理解</li>
+    <li>熟悉各功能模組的操作與維護方式</li>
+    <li>建立未來系統優化與整合的基礎知識庫</li>
+  </ul>
+
+  <p><strong>委託單位</strong>：台灣大資源服務技術處／工務暨運籌系統部／服務技術課<br>
+    <strong>受訓對象</strong>：相關工程師、系統管理員、專案成員等<br>
+    <strong>預估時數</strong>：72 小時（共 6 個月，每月 4 週，每週 3 小時）
+  </p>
+
+  <hr>
+
+  <h2>🧾 二、訓練項目整理（依據來信內容）</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>項次</th>
+        <th>教育項目</th>
+        <th>說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>系統基礎介紹</td>
+        <td>不在 152 個模組內的相關功能</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>功能模組內容說明（程式）</td>
+        <td>含以下子項目：<br>1. 系統維護管理<br>2. 告警查詢管理<br>3. 一般查詢管理<br>4. 告警設備關聯資訊查詢<br>5. 全區輪值排班管理系統<br>6. 機房日誌程式<br>7.
+          網管中心作業管理<br>8. Paging 設定管理<br>9. 障礙管理及處理系統<br>10. IFM Presentation Layer<br>11. 手動告警簡訊管理<br>12. Splunk for
+          ISMS 管理<br>13. 公共工程影響通報機制</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>系統維護與管理說明</td>
+        <td>系統權限配置、帳號管理、維護流程等</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>資料庫結構說明</td>
+        <td>DB Table 架構與各功能模組之間的關聯</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>告警收容機制說明</td>
+        <td>log 傳輸機制、格式、種類、記錄方式、是否涉及機敏資料需隱碼等</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>🛠️ 三、建議執行方式（快速有效）</h2>
+
+  <h3>🔹 Step 1：建立教育訓練綱要（SOP 文件）</h3>
+  <ul>
+    <li>制定一份「iNAD 教學大綱」文件，依序列出每週主題與講師安排。</li>
+    <li>可搭配 Google Sheet 或 Notion 作為協同平台。</li>
+  </ul>
+
+  <h3>🔹 Step 2：分階段教學（每週聚焦一個主軸）</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>月份</th>
+        <th>教學重點</th>
+        <th>建議方式</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>第1月</td>
+        <td>系統基礎 + 功能模組概覽</td>
+        <td>結合簡報 + 畫面導覽</td>
+      </tr>
+      <tr>
+        <td>第2月</td>
+        <td>功能模組深入說明（1~6項）</td>
+        <td>工程師現場 coding / Demo</td>
+      </tr>
+      <tr>
+        <td>第3月</td>
+        <td>功能模組深入說明（7~13項）</td>
+        <td>工程師現場 coding / Demo</td>
+      </tr>
+      <tr>
+        <td>第4月</td>
+        <td>系統維護管理 + 權限架構</td>
+        <td>系統管理員分享經驗</td>
+      </tr>
+      <tr>
+        <td>第5月</td>
+        <td>資料庫結構說明</td>
+        <td>DBA 解說 Schema + ER Diagram</td>
+      </tr>
+      <tr>
+        <td>第6月</td>
+        <td>告警收容機制 + 總結 Q&A</td>
+        <td>結合 Log 分析工具展示 + QA</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>🔹 Step 3：製作教材與錄影存檔</h3>
+  <ul>
+    <li>每場訓練皆須有：
+      <ul>
+        <li>投影片（PPT / PDF）</li>
+        <li>畫面操作錄製（可使用 OBS、Zoom 錄影）</li>
+        <li>簡易筆記或操作手冊（供後續查閱）</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🔹 Step 4：建立問答與問題追蹤表</h3>
+  <ul>
+    <li>使用 Google Sheet 建立：
+      <ul>
+        <li>問題描述</li>
+        <li>提出人</li>
+        <li>回覆人</li>
+        <li>處理狀態（待處理 / 已回覆 / 需進一步討論）</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🔹 Step 5：定期彙整與盤點優化建議</h3>
+  <ul>
+    <li>每月會議中同步進度，並討論：
+      <ul>
+        <li>哪些功能未來新系統需保留？</li>
+        <li>哪些功能可以優化整合？</li>
+        <li>是否有重複/冗餘模組？</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>📦 四、推薦工具清單（提升效率）</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>工具名稱</th>
+        <th>用途</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Google Drive</td>
+        <td>上傳投影片、錄音檔、教材</td>
+      </tr>
+      <tr>
+        <td>Zoom / Teams</td>
+        <td>線上會議 + 錄影</td>
+      </tr>
+      <tr>
+        <td>Notion / Trello</td>
+        <td>協作管理與進度追蹤</td>
+      </tr>
+      <tr>
+        <td>OBS Studio</td>
+        <td>高品質螢幕錄影</td>
+      </tr>
+      <tr>
+        <td>Draw.io / Lucidchart</td>
+        <td>畫 ER Diagram、流程圖</td>
+      </tr>
+      <tr>
+        <td>GitLab / GitHub</td>
+        <td>存放部分程式碼片段供參考（如有需要）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>🎯 五、其他建議事項</h2>
+  <ol>
+    <li><strong>建議邀請原開發團隊參與教學</strong><br>讓最了解系統的人直接說明，減少誤解。</li>
+    <li><strong>鼓勵學員提出優化建議</strong><br>在每次課程結束後開放提問與建議，為未來系統升級做準備。</li>
+    <li><strong>搭配沙盒環境練習</strong><br>若有測試環境，讓學員實際操作，強化學習效果。</li>
+    <li><strong>設定學習目標與成果驗收</strong><br>每階段可設小考或實作任務，確保吸收成效。</li>
+  </ol>
+
+  <hr>
+
+  <h2>📝 六、建議簡報大綱（可用於向主管簡報）</h2>
+  <pre>
+### iNAD 教育訓練簡報大綱
+
+1. 背景與目的
+2. 教學項目與分工
+3. 排程規劃（每月主題）
+4. 教材與錄影機制
+5. 問題追蹤與優化建議
+6. 預期效益與後續應用
+</pre>
+
+  <hr>
+
+  <h2>✅ 七、總結</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>項目</th>
+        <th>建議做法</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>教學時間</td>
+        <td>每週一次，每次 3 小時，共 6 個月</td>
+      </tr>
+      <tr>
+        <td>教學形式</td>
+        <td>線上+現場混合、錄影存檔</td>
+      </tr>
+      <tr>
+        <td>教材產出</td>
+        <td>PPT、Demo 影片、操作手冊</td>
+      </tr>
+      <tr>
+        <td>問題追蹤</td>
+        <td>建立共用表格，持續更新</td>
+      </tr>
+      <tr>
+        <td>優化建議</td>
+        <td>每月同步盤點舊功能，評估是否保留或優化整合</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>📌 附註</h2>
+  <p>如需協助產生以下內容，歡迎隨時告知：</p>
+  <ul>
+    <li>「iNAD 教學大綱模板（Word/PPT）」</li>
+    <li>「教育訓練說明投影片」</li>
+    <li>「Google Sheet 追蹤表」</li>
+    <li>「每週教學主題與講師安排」</li>
+  </ul>
+
+  <p>祝您的教育訓練任務順利成功！💼📄</p>
+
+</body>
+
+</html>
