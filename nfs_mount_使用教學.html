@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>NFS 掛載使用教學與常見問題處理</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: auto; padding: 20px; }
+    h1, h2, h3 { color: #2c3e50; }
+    code { background-color: #f4f4f4; padding: 2px 6px; border-radius: 4px; }
+    pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    .highlight { background-color: #fff9c4; padding: 10px; border-left: 4px solid #fbc02d; }
+  </style>
+</head>
+<body>
+
+<h1>當執行 NFS 掛載時出現 permission / Operation not permitted 時的解決方法</h1>
+
+<p>當您在執行以下指令時：</p>
+
+<pre><code>sudo mount -t nfs 192.168.0.100:/home/wheeltec/wheeltec_robot  /mnt</code></pre>
+
+<p>出現錯誤訊息類似：</p>
+
+<pre><code>mount failed: Operation not permitted</code></pre>
+
+<p>這通常不是 Linux 端的權限問題，而是 <strong>NFS Server</strong>（也就是 <code>192.168.0.100</code>）沒有允許您的客戶端掛載這個目錄。以下是常見原因與解決方法。</p>
+
+<hr>
+
+<h2>🔍 常見原因與解決方式</h2>
+
+<h3>✅ 1. 檢查 NFS Server 是否正確導出該目錄</h3>
+
+<p>在 NFS Server 端（即 <code>192.168.0.100</code>），請檢查 <code>/etc/exports</code> 的內容：</p>
+
+<pre><code>cat /etc/exports</code></pre>
+
+<p>應該要有類似這樣的條目：</p>
+
+<pre><code>/home/wheeltec/wheeltec_robot 192.168.0.0/24(rw,sync,no_subtree_check)</code></pre>
+
+<p>如果沒有這個目錄或 IP 範圍不對，就無法掛載。</p>
+
+<div class="highlight">
+  <p>🛠️ 解決方法：</p>
+  <ol>
+    <li>修改 <code>/etc/exports</code> 加入正確設定。</li>
+    <li>執行 <code>exportfs -ra</code> 更新導出清單。</li>
+    <pre><code>sudo exportfs -ra</code></pre>
+    <li>再次嘗試從客戶端掛載。</li>
+  </ol>
+</div>
+
+<h3>✅ 2. 檢查 NFS 服務是否正在運行</h3>
+
+<p>在 Server 端確認 NFS 服務有啟動：</p>
+
+<pre><code>sudo systemctl status nfs-kernel-server</code></pre>
+
+<p>如果沒啟動，啟動它：</p>
+
+<pre><code>sudo systemctl start nfs-kernel-server
+sudo systemctl enable nfs-kernel-server</code></pre>
+
+<h3>✅ 3. 檢查防火牆設定（Server 和 Client）</h3>
+
+<p>Server 上可能有防火牆（如 <code>ufw</code> 或 <code>iptables</code>）阻止了 NFS 訊號。</p>
+
+<p>放行 NFS 所需的埠號（通常是 2049）：</p>
+
+<pre><code>sudo ufw allow from 192.168.0.0/24 to any port 2049</code></pre>
+
+<p>如果使用其他 NFS 相關服務或 rpcbind，也需要開放相應埠號。</p>
+
+<h3>✅ 4. 檢查 RPC/NFS 服務是否正常運作</h3>
+
+<p>在客戶端執行：</p>
+
+<pre><code>rpcinfo -p 192.168.0.100</code></pre>
+
+<p>應該會看到一堆 NFS 相關的服務資訊。如果看不到，表示 NFS 服務未正確啟動或網路不通。</p>
+
+<h3>✅ 5. 使用 <code>-o nolock</code> 避免鎖定問題（可選）</h3>
+
+<p>偶爾可以加上這個參數避免鎖定衝突：</p>
+
+<pre><code>sudo mount -t nfs -o nolock 192.168.0.100:/home/wheeltec/wheeltec_robot /mnt</code></pre>
+
+<hr>
+
+<h2>🧪 測試小技巧</h2>
+
+<p>您可以在 Server 端自己掛載看看是否正常：</p>
+
+<pre><code>sudo mount --bind /home/wheeltec/wheeltec_robot /mnt</code></pre>
+
+<p>若能成功，表示資料夾存在且無問題。</p>
+
+<hr>
+
+<h2>📌 總結步驟（快速處理流程）</h2>
+
+<ol>
+  <li>登入 Server (<code>192.168.0.100</code>)</li>
+  <li>確認 <code>/etc/exports</code> 有正確導出目標目錄與客戶端 IP。</li>
+  <li>執行 <code>sudo exportfs -ra</code></li>
+  <li>確保 NFS 服務已啟動：<code>systemctl status nfs-kernel-server</code></li>
+  <li>檢查防火牆設定。</li>
+  <li>回到客戶端再次執行 mount 指令。</li>
+</ol>
+
+<hr>
+
+<p>如果您提供更完整的錯誤訊息（例如完整錯誤文字），我可以幫您更精準判斷原因。</p>
+
+<p>需要我協助寫 <code>/etc/exports</code> 的範例嗎？</p>
+
+</body>
+</html>
