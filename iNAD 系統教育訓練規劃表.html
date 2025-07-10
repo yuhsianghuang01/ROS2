@@ -63,6 +63,69 @@
       margin: 10px 0;
     }
   </style>
+  <style>
+    body {
+      font-family: "Microsoft JhengHei", sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    ul.tree {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+
+    ul.tree li {
+      position: relative;
+      padding-left: 20px;
+      margin: 5px 0;
+    }
+
+    ul.tree li::before {
+      content: "▶";
+      display: inline-block;
+      width: 1em;
+      margin-left: -1.5em;
+      cursor: pointer;
+      color: #666;
+    }
+
+    ul.tree li ul {
+      display: none;
+    }
+
+    ul.tree li.open>ul {
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
 </head>
 
 <body>
@@ -79,7 +142,7 @@
     <li>建立未來系統優化與整合的基礎知識庫</li>
   </ul>
 
-  <p><strong>委託單位</strong>：台灣大資源服務技術處／工務暨運籌系統部／服務技術課<br>
+  <p><strong>委託單位</strong>：B公司 資源服務技術處／工務暨運籌系統部／服務技術課<br>
     <strong>受訓對象</strong>：相關工程師、系統管理員、專案成員等<br>
     <strong>預估時數</strong>：72 小時（共 6 個月，每月 4 週，每週 3 小時）
   </p>
@@ -216,7 +279,7 @@
 
   <hr>
 
-  <h2>📦 四、推薦工具清單（提升效率）</h2>
+  <!-- <h2>📦 四、推薦工具清單（提升效率）</h2>
   <table>
     <thead>
       <tr>
@@ -252,7 +315,7 @@
     </tbody>
   </table>
 
-  <hr>
+  <hr> -->
 
   <h2>🎯 五、其他建議事項</h2>
   <ol>
@@ -321,7 +384,10 @@
     <li>「每週教學主題與講師安排」</li>
   </ul>
 
-  <p>祝您的教育訓練任務順利成功！💼📄</p>
+
+
+
+
 
 </body>
 
