@@ -1,4 +1,53 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+雷射掃描跟隨器程式
+=====================================
+
+技術背景知識：
+
+1. LiDAR (光達) 技術原理：
+   - 發射雷射脈衝並測量反射時間
+   - 360度掃描獲得周圍環境的距離資料
+   - 高精度：毫米級測距準確度
+   - 環境適應性：不受光照影響，適用於室內外
+
+2. 雷射掃描資料結構：
+   - LaserScan 訊息：包含角度範圍、解析度、距離陣列
+   - angle_min/max：掃描角度範圍 (通常 -π 到 π)
+   - angle_increment：角度解析度 (每個測量點間的角度差)
+   - ranges[]：距離資料陣列 (對應每個角度的距離值)
+
+3. 物體跟隨策略：
+   - 空間差異分析：比較連續掃描中的變化
+   - 聚類分析：將相近的距離點群組為物體
+   - 質心計算：確定物體的中心位置
+   - 運動預測：基於歷史資料預測物體移動
+
+4. 手把控制整合：
+   - Joy (操縱桿) 訊息：按鈕和搖桿狀態
+   - 模式切換：手動/自動跟隨模式
+   - 安全機制：失去連線時自動停止
+   - 速度限制：防止過激的運動指令
+
+5. PID 控制應用：
+   - 目標：維持與跟隨物體的固定距離和角度
+   - 比例項：與當前誤差成正比的修正
+   - 積分項：消除長期累積誤差
+   - 微分項：預測趨勢，減少震盪
+
+程式功能：
+結合 LiDAR 感測器和手把控制實現智慧物體跟隨，
+機器人可自動保持與目標物體的固定距離，
+適用於購物助手、行李搬運、寵物跟隨等應用。
+
+應用場景：
+- 自動購物車：跟隨使用者移動
+- 行李搬運機器人：機場、酒店應用
+- 寵物陪伴機器人：戶外散步助手
+- 工業助手：跟隨工作人員移動
+"""
+
 # Copyright 2016 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,39 +76,103 @@ from example_interfaces.srv import AddTwoInts
 
 import rclpy
 from rclpy.node import Node
-angle=[0.0]*3
-distan=[0.0]*3
+# 全域變數：儲存角度和距離資訊
+# 用於在不同函數間共享計算結果
+angle=[0.0]*3    # 角度陣列：[左側角度, 中心角度, 右側角度]
+distan=[0.0]*3   # 距離陣列：[左側距離, 中心距離, 右側距離]
 
 class LaserFollower(Node):
+    """
+    雷射跟隨器節點類別
+    
+    主要功能：
+    1. 接收 LiDAR 掃描資料
+    2. 偵測可跟隨的物體
+    3. 結合手把控制進行模式切換
+    4. 發送機器人運動指令
+    
+    控制架構：
+    - 感測器融合：LiDAR + 手把輸入
+    - 雙模式操作：手動控制 / 自動跟隨
+    - 安全機制：連線監控和緊急停止
+    - PID 控制：平滑的跟隨行為
+    
+    技術特點：
+    - 即時物體偵測：基於距離變化分析
+    - 多執行緒處理：按鈕事件和主控制迴圈分離
+    - 參數化設定：可調整的 PID 參數和速度限制
+    - 連線監控：手把斷線自動停止保護機制
+    """
 
 	def __init__(self):
-		super().__init__('laserfollower')
-		self.controllerLossTimer = threading.Timer(1, self.controllerLoss) #if we lose connection
+        """
+        雷射跟隨節點初始化
+        
+        設定項目：
+        1. 連線監控定時器
+        2. PID 控制參數宣告
+        3. 手把控制設定
+        4. 模式和安全參數
+        5. 發布器和訂閱器建立
+        
+        參數系統：
+        使用 ROS2 參數系統進行運行時配置，
+        允許動態調整控制參數而無需重新編譯。
+        """
+		super().__init__('laserfollower')  # 建立名為 'laserfollower' 的 ROS2 節點
+		
+		# 連線監控定時器：偵測手把控制器斷線
+		# 如果 1 秒內沒有收到 Joy 訊息，就會觸發 controllerLoss 函數
+		self.controllerLossTimer = threading.Timer(1, self.controllerLoss)
 		self.controllerLossTimer.start()
-		self.declare_parameter('P')
-		self.declare_parameter('I')
-		self.declare_parameter('D')
-		# as soon as we stop receiving Joy messages from the ps3 controller we stop all movement:
-		#self.switchMode= self.declare_parameter('~switchMode').value # if this is set to False the O button has to be kept pressed in order for it to move
+		
+		# PID 控制參數宣告：允許執行時動態調整
+		# 這些參數控制機器人跟隨行為的穩定性和響應速度
+		self.declare_parameter('P')  # 比例增益：控制響應強度
+		self.declare_parameter('I')  # 積分增益：消除穩態誤差
+		self.declare_parameter('D')  # 微分增益：減少震盪和超調
+		
+		# 操作模式設定
+		# switchMode = True：按一次按鈕切換模式 (推薦)
+		# switchMode = False：需持續按住按鈕才能跟隨 (安全模式)
 		self.switchMode= True
+		
+		# 最大速度限制：防止過於激烈的運動 (公尺/秒)
 		self.max_speed = self.declare_parameter('~maxSpeed').value
-		#self.controllButtonIndex = self.declare_parameter('~controllButtonIndex').value
+		
+		# 手把按鈕映射：控制跟隨模式開關
+		# -4 對應 PS3/PS4 手把的某個特定按鈕
 		self.controllButtonIndex = -4
-		self.buttonCallbackBusy=False
-		self.active=False
-		self.i=0
-		qos = QoSProfile(depth=10)
+		
+		# 控制狀態變數
+		self.buttonCallbackBusy=False  # 按鈕回調忙碌旗標：避免重複處理
+		self.active=False              # 跟隨模式啟動狀態
+		self.i=0                       # 迴圈計數器
+		
+		# QoS 設定：優化訊息傳輸品質
+		qos = QoSProfile(depth=10)  # 佇列深度 10，平衡延遲與可靠性
+		
+		# 機器人速度控制發布器
+		# 發布 Twist 訊息到 'cmd_vel' 主題控制機器人移動
 		self.cmdVelPublisher = self.create_publisher(Twist, 'cmd_vel', qos)
+		
+		# 物體位置訂閱器：接收追蹤器偵測到的目標位置
+		# 來源：視覺追蹤器或其他物體偵測模組
 		self.positionSubscriber = self.create_subscription(
 		    PositionMsg,
 		    '/object_tracker/current_position',
-		    self.positionUpdateCallback,
+		    self.positionUpdateCallback,  # 位置更新回調函數
 		    qos)
+		
+		# 追蹤資訊訂閱器：接收追蹤狀態和錯誤訊息
+		# 用於監控追蹤器的工作狀態和異常情況
 		self.trackerInfoSubscriber = self.create_subscription(
 		    StringMsg,
 		    '/object_tracker/info',
-		    self.trackerInfoCallback,
+		    self.trackerInfoCallback,  # 資訊處理回調函數
 		    qos)
+		
+		# 目標距離參數：機器人與跟隨物體的理想距離 (毫米)
 		targetDist = self.declare_parameter('~targetDist')
 		#pid_param = self.declare_parameter('~PID_controller')
 		P = self.get_parameter('P').get_parameter_value().double_value
