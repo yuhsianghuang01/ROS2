@@ -1,0 +1,21 @@
+虚拟机与主控多机通信问题
+问题描述：虚拟机ping主控的ip可以ping通，ssh可以登录上主控，但无法在虚拟机端获取主控的话题信息
+解决方法
+方法一：停止docker服务
+ sudo systemctl disable docker
+
+方法二：加入Domain ID
+微主控端（Nano）:
+在~/.bashrc文件末行加入ROS_DOMAIN_ID=31
+source .bashrc
+虚拟机端:
+在~/.bashrc文件末行加入ROS_DOMAIN_ID=31
+source .bashrc
+主控重启
+
+方法三、主控端（Nano）与虚拟机重启
+
+测试效果：虚拟机ssh登录主控后，$wheeltec@wheeltec执行指令：ros2 run demo_nodes_cpp talker 发布Publishing: 'Hello World: number'
+$wheeltec@humble执行指令：ros2 run demo_nodes_cpp listener终端接收 heard: [Hello World: number]
+
+
