@@ -35,20 +35,20 @@
 適用於倉儲自動導引車 (AGV) 或教育機器人等應用。
 """
 
-import cv2
-import numpy as np
-import rclpy
-import time
-import numpy
-from rclpy.node import Node
-from sensor_msgs.msg import Image
-from rclpy.qos import QoSProfile
-import cv_bridge
-from geometry_msgs.msg import Twist
+import cv2                         # OpenCV 影像處理函式庫
+import numpy as np                 # 數值計算函式庫，用於陣列運算
+import rclpy                       # ROS2 Python 客戶端函式庫
+import time                        # 時間相關函式，用於計算 dt
+import numpy                       # 重複引入，可考慮移除
+from rclpy.node import Node        # ROS2 節點基底類別
+from sensor_msgs.msg import Image  # ROS2 影像訊息類型
+from rclpy.qos import QoSProfile   # ROS2 服務品質設定
+import cv_bridge                   # ROS2 和 OpenCV 之間的轉換橋樑
+from geometry_msgs.msg import Twist # ROS2 速度控制訊息類型
 
 # PID 控制相關全域變數
 last_erro=0  # 記錄上一次的誤差值，用於計算微分項 (D 控制)
-tmp_cv = 0   # 介面控制旗標，確保 OpenCV 視窗只建立一次
+tmp_cv = 0   # 介面控制旗標，確保 OpenCV 視窗只建立一次，避免重複建立視窗
 
 def nothing(s):
     """
@@ -59,19 +59,21 @@ def nothing(s):
         
     說明：OpenCV 的 createTrackbar 函數要求提供回調函數，
          但我們採用主動讀取滑動條數值的方式，因此使用空函數
+    技術細節：這是 OpenCV GUI 程式設計的常見模式
     """
     pass
 
 # 預定義顏色 HSV 範圍 - 針對常見線條顏色進行優化
 # 格式：(H最小值, S最小值, V最小值, H最大值, S最大值, V最大值)
-# 注意：OpenCV 中 H 值範圍為 0-179 (而非 0-359)
-col_black = (0,0,0,180,255,46)      # 黑色範圍：低飽和度、低明度
-col_red = (0,100,80,10,255,255)     # 紅色範圍：H值接近0或180  
-col_blue = (100,43,46,124,255,255)  # 藍色範圍：H值約100-124
-col_green= (35,43,46,77,255,255)    # 綠色範圍：H值約35-77
-col_yellow = (26,43,46,34,255,255)  # 黃色範圍：H值約26-34
+# 注意：OpenCV 中 H 值範圍為 0-179 (而非標準的 0-359)
+# 技術要點：HSV 色彩空間對光照變化較為穩定，適合機器視覺應用
+col_black = (0,0,0,180,255,46)      # 黑色範圍：低飽和度、低明度，適合黑色膠帶線條
+col_red = (0,100,80,10,255,255)     # 紅色範圍：H值接近0或180，注意紅色橫跨HSV環形  
+col_blue = (100,43,46,124,255,255)  # 藍色範圍：H值約100-124，穩定的藍色識別
+col_green= (35,43,46,77,255,255)    # 綠色範圍：H值約35-77，涵蓋大部分綠色變化
+col_yellow = (26,43,46,34,255,255)  # 黃色範圍：H值約26-34，明亮的黃色線條
 
-# 顏色選擇介面說明文字
+# 顏色選擇介面說明文字 - 提供使用者選擇線條顏色的參考
 Switch = '0:Red\n1:Green\n2:Blue\n3:Yellow\n4:Black'
 
 
@@ -80,24 +82,33 @@ class Follower(Node):
     線條跟隨節點類別
     
     主要功能：
-    1. 接收相機影像串流
-    2. 進行顏色篩選和線條偵測  
-    3. 計算控制誤差
-    4. 發送機器人運動指令
+    1. 接收相機影像串流 - 透過 ROS2 image 主題
+    2. 進行顏色篩選和線條偵測 - 使用 HSV 顏色空間濾波 
+    3. 計算控制誤差 - 基於線條中心與影像中心的偏差
+    4. 發送機器人運動指令 - 透過 cmd_vel 主題控制機器人
     
     控制策略：
-    - 使用簡化 PD 控制器 (比例 + 微分)
-    - 固定前進速度，調整轉向角速度
-    - 基於線條中心偏移計算轉向量
+    - 使用簡化 PD 控制器 (比例 + 微分控制)
+    - 固定前進速度，動態調整轉向角速度
+    - 基於線條中心偏移量計算轉向修正量
+    - 當偵測不到線條時採用安全停止策略
     
     適用場景：
-    - 室內導航線跟隨
-    - 競賽機器人路徑追蹤
-    - 自動倉儲系統導引
+    - 室內導航線跟隨 (如醫院、工廠導引線)
+    - 競賽機器人路徑追蹤 (如RoboCup救援線跟隨)
+    - 自動倉儲系統導引 (AGV 自動導引車)
+    - 教育機器人視覺控制教學
     """
     def __init__(self):
         """
         節點初始化設定
+        
+        功能說明：
+        1. 建立 ROS2 節點和相關發布者/訂閱者
+        2. 初始化 OpenCV 橋接器和控制參數
+        3. 設定影像處理和控制相關變數
+        4. 建立用戶介面視窗和參數調節介面
+        """
         
         建立項目：
         1. ROS2 節點基礎架構
